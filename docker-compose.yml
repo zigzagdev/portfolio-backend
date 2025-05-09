@@ -17,7 +17,7 @@ services:
     image: nginx:1.25
     container_name: nginx
     ports:
-      - "8902:80"
+      - "3472:80"
     depends_on:
       - app
     volumes:
@@ -34,5 +34,5 @@ services:
       MYSQL_PASSWORD: portfolio
       TZ: "Asia/Tokyo"
     ports:
-      - "4401:3306"
+      - "45401:3306"
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
