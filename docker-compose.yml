@@ -2,7 +2,9 @@ version: '3'
 services:
   app:
     container_name: php-app
-    build: ./docker/app
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
     volumes:
       - ./src:/var/www
     depends_on:
@@ -35,6 +37,13 @@ services:
       TZ: "Asia/Tokyo"
     ports:
       - "45401:3306"
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: >
+      mysqld
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
     volumes:
       - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
