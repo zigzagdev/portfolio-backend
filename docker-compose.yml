@@ -44,6 +44,37 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
+  test_database:
+    container_name: mysql-test
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: app_test
+      MYSQL_DATABASE: app_test
+      MYSQL_USER: app_test
+      MYSQL_PASSWORD: app_test
+      TZ: "Asia/Tokyo"
+    ports:
+      - "9923:3306"
+    command: >
+      mysqld
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+
+  test_runner:
+    container_name: laravel-test
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    volumes:
+      - ./src:/var/www
+    depends_on:
+      - test_database
+    environment:
+      - APP_ENV=testing
+      - DB_HOST=test_database
+      - DB_DATABASE=app_test
+      - DB_USERNAME=app_test
+      - DB_PASSWORD=app_test
+
 volumes:
   mysql_data:
-
