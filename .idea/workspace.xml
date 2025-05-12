@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6952a861-17ec-40ad-b866-c564752c14a8" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/Common/Domain/Userid.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/User/Domain/DomainTest/UserRegisterEntityFactoryTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/User/Domain/Entity/UserEntity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/User/Domain/Factory/UserEntityFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/User/Domain/RepositoryInterface/PasswordHasherInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/User/Domain/ValueObject/Email.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/User/Domain/ValueObject/Password.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/User/Domain/DomainTest/UserDuplicationCheckerTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/User/Domain/RepositoryInterface/UserRepositoryInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/User/Domain/Service/UserDuplicationChecker.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.env.test" beforeDir="false" afterPath="$PROJECT_DIR$/src/.env.test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/phpunit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,18 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "zigzagdev"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;zigzagdev&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/zigzagdev/portfolio-backend.git",
-    "accountId": "600ff46e-8a2a-4504-b793-eeaeaf1d4cea"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/zigzagdev/portfolio-backend.git&quot;,
+    &quot;accountId&quot;: &quot;600ff46e-8a2a-4504-b793-eeaeaf1d4cea&quot;
   }
-}]]></component>
+}</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/opt/homebrew/Cellar/php/8.3.10/bin/php">
     <include_path>
       <path value="$PROJECT_DIR$/src/vendor/staabm/side-effects-detector" />
@@ -158,9 +151,9 @@
       <path value="$PROJECT_DIR$/src/vendor/ramsey/uuid" />
     </include_path>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2ww08vzBz0wGQ51SjARNeXIjyWF" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -170,7 +163,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/regisetr-user-domain-entity-valueobject",
+    "git-widget-placeholder": "feature/email-validation-domain",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
