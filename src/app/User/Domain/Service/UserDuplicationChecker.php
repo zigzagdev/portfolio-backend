@@ -13,7 +13,7 @@ class UserDuplicationChecker
     ) {
     }
 
-    public function existsCheck(Email $email): ?bool
+    public function existsCheck(Email $email): bool
     {
         return $this->userRepository->existsByEmail($email);
     }

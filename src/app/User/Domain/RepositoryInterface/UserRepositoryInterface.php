@@ -9,5 +9,5 @@ interface UserRepositoryInterface
 {
     public function save(User $user): void;
 
-    public function existsByEmail(Email $email): ?bool;
+    public function existsByEmail(Email $email): bool;
 }
