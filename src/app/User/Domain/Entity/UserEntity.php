@@ -12,18 +12,18 @@ class UserEntity
     private readonly string $firstName;
     private readonly string $lastName;
     private readonly Email $email;
-    private readonly Password $password;
+    private readonly ?Password $password;
     private readonly ?string $bio;
     private readonly ?string $location;
     private readonly array $skills;
     private readonly ?string $profileImage;
 
     public function __construct(
-        ?UserId $id,
+        ?UserId $id = null,
         string $firstName,
         string $lastName,
         Email $email,
-        Password $password,
+        ?Password $password = null,
         ?string $bio = null,
         ?string $location = null,
         array $skills = [],
@@ -60,7 +60,7 @@ class UserEntity
         return $this->email;
     }
 
-    public function getPassword(): Password
+    public function getPassword(): ?Password
     {
         return $this->password;
     }
