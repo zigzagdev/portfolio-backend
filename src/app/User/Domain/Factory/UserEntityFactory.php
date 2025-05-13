@@ -13,15 +13,17 @@ class UserEntityFactory
     public static function build(array $data, PasswordHasherInterface $hasher): UserEntity
     {
         return new UserEntity(
-            id: new UserId($data['id']) ?? null,
+            id: isset($data['id']) ? new UserId($data['id']) : null,
             firstName: $data['first_name'],
             lastName: $data['last_name'],
             email: new Email($data['email']),
             password: Password::fromPlainText($data['password'], $hasher),
-            bio: $data['bio'] ?? null,
-            location: $data['location'] ?? null,
-            skills: $data['skills'] ?? [],
-            profileImage: $data['profile_image'] ?? null
+            bio: isset($data['bio']) ? $data['bio'] : null,
+            location: isset($data['location']) ? $data['location'] : null,
+            skills: is_string($data['skills'])
+                ? json_decode($data['skills'], true)
+                : (is_array($data['skills']) ? $data['skills'] : []),
+            profileImage: isset($data['profile_image']) ? $data['profile_image'] : null
         );
     }
 }
