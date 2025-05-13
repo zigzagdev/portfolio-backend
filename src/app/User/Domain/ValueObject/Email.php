@@ -17,7 +17,7 @@ final class Email
         $this->value = $value;
     }
 
-    public function getEmail(): string
+    public function getValue(): string
     {
         return $this->value;
     }
