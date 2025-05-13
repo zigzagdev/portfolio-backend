@@ -1,6 +1,6 @@
 <?php
 
-namespace App\User\Domain\InfrastructureTest;
+namespace App\User\Infrastructure\InfrastructureTest;
 
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserEntityFactory;
@@ -13,17 +13,22 @@ use Tests\TestCase;
 class UserRepositoryTest extends TestCase
 {
     use RefreshDatabase;
+
     private UserRepository $repository;
+    private PasswordHasherInterface $hasher;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->repository = new UserRepository();
+
+        $this->hasher = $this->mockHasher();
+        $this->repository = new UserRepository($this->hasher);
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
+        Mockery::close();
     }
 
     /**
@@ -73,9 +78,7 @@ class UserRepositoryTest extends TestCase
     private function mockHasher(): PasswordHasherInterface
     {
         $hasher = Mockery::mock(PasswordHasherInterface::class);
-
-        $hasher
-            ->shouldReceive('hash')
+        $hasher->shouldReceive('hash')
             ->with($this->mockRequest()['password'])
             ->andReturn($this->mockRequest()['password']);
 
@@ -84,6 +87,6 @@ class UserRepositoryTest extends TestCase
 
     private function mockEntity(): UserEntity
     {
-        return UserEntityFactory::build($this->mockRequest(), $this->mockHasher());
+        return UserEntityFactory::build($this->mockRequest(), $this->hasher); // ✅ 変更
     }
 }
