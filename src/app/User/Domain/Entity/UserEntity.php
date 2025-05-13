@@ -2,13 +2,13 @@
 
 namespace App\User\Domain\Entity;
 
-use App\Common\Domain\Userid;
+use App\Common\Domain\UserId;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
+use LogicException;
 
 class UserEntity
 {
-    private readonly ?UserId $id;
     private readonly string $firstName;
     private readonly string $lastName;
     private readonly Email $email;
@@ -17,9 +17,9 @@ class UserEntity
     private readonly ?string $location;
     private readonly array $skills;
     private readonly ?string $profileImage;
+    private readonly ?UserId $id;
 
     public function __construct(
-        ?UserId $id = null,
         string $firstName,
         string $lastName,
         Email $email,
@@ -27,9 +27,9 @@ class UserEntity
         ?string $bio = null,
         ?string $location = null,
         array $skills = [],
-        ?string $profileImage = null
+        ?string $profileImage = null,
+        ?UserId $id = null
     ) {
-        $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
@@ -38,6 +38,7 @@ class UserEntity
         $this->location = $location;
         $this->skills = $skills;
         $this->profileImage = $profileImage;
+        $this->id = $id;
     }
 
     public function getUserId(): ?UserId
@@ -63,6 +64,15 @@ class UserEntity
     public function getPassword(): ?Password
     {
         return $this->password;
+    }
+
+    public function getValidatedHashedPassword(): string
+    {
+        if ($this->password === null) {
+            throw new LogicException('Password is null.');
+        }
+
+        return $this->password->getHashedPassword();
     }
 
     public function getBio(): ?string

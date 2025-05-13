@@ -13,9 +13,9 @@ class UserRepository implements UserRepositoryInterface
 {
     public function save(UserEntity $entity): ?UserEntity
     {
-        $validatedEmail = $this->existsByEmail($entity->getEmail());
+        $notValidatedEmail = $this->existsByEmail($entity->getEmail());
 
-        if ($validatedEmail) {
+        if ($notValidatedEmail) {
             throw new InvalidArgumentException('Email is already in use.');
         }
 
@@ -23,7 +23,7 @@ class UserRepository implements UserRepositoryInterface
             'first_name' => $entity->getFirstName(),
             'last_name' => $entity->getLastName(),
             'email' => $entity->getEmail()->getValue(),
-            'password' => $entity->getPassword()->getHashedPassword(),
+            'password' => $entity->getValidatedHashedPassword($entity),
             'bio' => $entity->getBio(),
             'location' => $entity->getLocation(),
             'skills' => json_encode($entity->getSkills()),
