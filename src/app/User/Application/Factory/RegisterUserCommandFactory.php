@@ -3,7 +3,7 @@
 namespace App\User\Application\Factory;
 
 use App\User\Application\UseCommand\RegisterUserCommand;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use InvalidArgumentException;
 
 class RegisterUserCommandFactory

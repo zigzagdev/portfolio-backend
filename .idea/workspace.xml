@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6952a861-17ec-40ad-b866-c564752c14a8" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/User/Presentation/PresentationTest/RegisterUserViewModelFactoryTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/User/Presentation/ViewModel/Factory/RegisterUserViewModelFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/User/Presentation/ViewModel/RegisterUserViewModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/User/Application/Dto/RegisterUserDto.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Application/Dto/RegisterUserDto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/User/Presentation/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Presentation/Controller/UserController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +160,7 @@
     "PHPUnit.メイン.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/user-register-presentation-viewmodel",
+    "git-widget-placeholder": "feature/register-user-presentation-controller",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
