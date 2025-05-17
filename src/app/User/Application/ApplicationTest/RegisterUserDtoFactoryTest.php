@@ -2,6 +2,8 @@
 
 namespace App\User\Application\ApplicationTest;
 
+use App\User\Domain\Entity\UserEntity;
+use App\User\Domain\Factory\UserEntityFactory;
 use Tests\TestCase;
 use App\User\Application\Factory\RegisterUserDtoFactory;
 use App\User\Application\Dto\RegisterUserDto;
@@ -29,7 +31,7 @@ class RegisterUserDtoFactoryTest extends TestCase
      */
     public function test1(): void
     {
-        $testData = $this->mockUser();
+        $testData = $this->mockEntity();
         $result = RegisterUserDtoFactory::build($testData);
 
         $this->assertInstanceOf(RegisterUserDto::class, $result);
@@ -41,7 +43,7 @@ class RegisterUserDtoFactoryTest extends TestCase
      */
     public function test2(): void
     {
-        $testData = $this->mockUser();
+        $testData = $this->mockEntity();
         $result = RegisterUserDtoFactory::build($testData);
 
         $this->assertEquals($result->id, new UserId($this->arrayRequestData()['id']));
@@ -54,27 +56,65 @@ class RegisterUserDtoFactoryTest extends TestCase
         $this->assertEquals($result->profileImage, $this->arrayRequestData()['profile_image']);
     }
 
-    private function mockUser(): User
+    private function mockEntity(): UserEntity
     {
-        $mockUser = Mockery::mock(User::class);
+        $factory = Mockery::mock(
+            'alias'. UserEntityFactory::class
+        );
 
-        $mockUser
-            ->shouldReceive('toArray')
-            ->andReturn($this->arrayRequestData());
+        $entity = Mockery::mock(
+            UserEntity::class
+        );
 
-        return $mockUser;
+        $factory
+            ->shouldReceive('build')
+            ->andReturn($entity);
+
+        $entity
+            ->shouldReceive('getUserId')
+            ->andReturn(new UserId($this->arrayRequestData()['id']));
+
+        $entity
+            ->shouldReceive('getFirstName')
+            ->andReturn($this->arrayRequestData()['first_name']);
+
+        $entity
+            ->shouldReceive('getLastName')
+            ->andReturn($this->arrayRequestData()['last_name']);
+
+        $entity
+            ->shouldReceive('getEmail')
+            ->andReturn(new Email($this->arrayRequestData()['email']));
+
+        $entity
+            ->shouldReceive('getBio')
+            ->andReturn($this->arrayRequestData()['bio']);
+
+        $entity
+            ->shouldReceive('getLocation')
+            ->andReturn($this->arrayRequestData()['location']);
+
+        $entity
+            ->shouldReceive('getSkills')
+            ->andReturn(json_decode($this->arrayRequestData()['skills'], true));
+
+        $entity
+            ->shouldReceive('getProfileImage')
+            ->andReturn($this->arrayRequestData()['profile_image']);
+
+        return $entity;
     }
 
     private function arrayRequestData(): array
     {
         return [
             'id' => 1,
-            'first_name' => 'Zlatan',
-            'last_name' => 'Ibrahimovic',
-            'email' => 'ac-milan@test.com',
+            'first_name' => 'Cristiano',
+            'last_name' => 'Ronaldo',
             'bio' => 'I am a football player',
-            'location' => 'Milan',
+            'email' => 'manchester-united@test.com',
             'skills' => json_encode(['Laravel', 'React']),
+            'location' => 'Manchester',
             'profile_image' => 'https://example.com/profile.jpg',
         ];
     }
