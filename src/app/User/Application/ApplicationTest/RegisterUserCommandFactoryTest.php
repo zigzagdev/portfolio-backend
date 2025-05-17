@@ -5,7 +5,7 @@ namespace  App\User\Application\ApplicationTest;
 use \Illuminate\Http\Client\Request;
 use Tests\TestCase;
 use Mockery;
-use App\User\Application\Factory\RegisterUserFactory;
+use App\User\Application\Factory\RegisterUserCommandFactory;
 use App\User\Application\UseCommand\RegisterUserCommand;
 
 class RegisterUserCommandFactoryTest extends TestCase
@@ -26,7 +26,7 @@ class RegisterUserCommandFactoryTest extends TestCase
      */
     public function test1(): void
     {
-        $result = RegisterUserFactory::build($this->mockRequest());
+        $result = RegisterUserCommandFactory::build($this->mockRequest());
 
         $this->assertInstanceOf(RegisterUserCommand::class, $result);
     }
@@ -37,7 +37,7 @@ class RegisterUserCommandFactoryTest extends TestCase
      */
     public function test2(): void
     {
-        $result = RegisterUserFactory::build($this->mockRequest());
+        $result = RegisterUserCommandFactory::build($this->mockRequest());
         foreach ($this->arrayRequestData() as $key => $expectedValue) {
             $camelKey = lcfirst(str_replace('_', '', ucwords($key, '_')));
             $getter = 'get' . ucfirst($camelKey);
