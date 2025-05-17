@@ -20,10 +20,50 @@ class RegisterUserDto
 
     }
 
+    public function getId(): UserId
+    {
+        return $this->id;
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    public function getEmail(): Email
+    {
+        return $this->email;
+    }
+
+    public function getBio(): string
+    {
+        return $this->bio ?? '';
+    }
+
+    public function getLocation(): string
+    {
+        return $this->location ?? '';
+    }
+
+    public function getSkills(): array
+    {
+        return $this->skills;
+    }
+
+    public function getProfileImage(): string
+    {
+        return $this->profileImage ?? '';
+    }
+
     public function toArray(): array
     {
         return [
-            'id' => $this->id->getUserId(),
+            'id' => $this->id->getValue(),
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
             'email' => $this->email->getValue(),
