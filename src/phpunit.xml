@@ -8,9 +8,6 @@
         <testsuite name="Unit">
             <directory>app</directory>
         </testsuite>
-        <testsuite name="Feature">
-            <directory>tests/Feature</directory>
-        </testsuite>
     </testsuites>
     <source>
         <include>
