@@ -2,7 +2,7 @@
 
 namespace  App\User\Application\ApplicationTest;
 
-use \Illuminate\Http\Client\Request;
+use \Illuminate\Http\Request;
 use Tests\TestCase;
 use Mockery;
 use App\User\Application\Factory\RegisterUserCommandFactory;
