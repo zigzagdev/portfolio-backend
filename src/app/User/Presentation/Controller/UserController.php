@@ -25,6 +25,8 @@ class UserController extends Controller
 
             $dto = $useCase->handle($command);
 
+            DB::connection('mysql')->commit();
+
             return response()->json([
                 'status' => 'success',
                 'data' => RegisterUserViewModelFactory::build($dto),
@@ -36,8 +38,6 @@ class UserController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage(),
             ], 500);
-        } finally {
-            DB::connection('mysql')->commit();
         }
     }
 }
