@@ -29,9 +29,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * The database connection that should be used by the model.
      *
-     * @var list<string>
+     * @var string
      */
     protected $connection = 'mysql';
 
