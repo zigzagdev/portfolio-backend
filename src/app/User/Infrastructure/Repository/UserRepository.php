@@ -2,6 +2,7 @@
 
 namespace App\User\Infrastructure\Repository;
 
+use App\Common\Domain\UserId;
 use App\Models\User;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
@@ -9,6 +10,7 @@ use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use LogicException;
+use Exception;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -29,7 +31,7 @@ class UserRepository implements UserRepositoryInterface
             'password' => $hashed,
             'bio' => $entity->getBio(),
             'location' => $entity->getLocation(),
-            'skills' => json_encode($entity->getSkills()),
+            'skills' => $entity->getSkills(),
             'profile_image' => $entity->getProfileImage()
         ]);
 
@@ -39,5 +41,16 @@ class UserRepository implements UserRepositoryInterface
     public function existsByEmail(Email $email): bool
     {
         return User::where('email', $email->getValue())->exists();
+    }
+
+    public function findById(UserId $id): UserEntity
+    {
+        $findUser = User::find($id->getValue());
+
+        if ($findUser === null) {
+            throw new Exception('User not found');
+        }
+
+        return UserFromModelEntityFactory::buildFromModel($findUser);
     }
 }
