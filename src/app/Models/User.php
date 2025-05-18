@@ -29,6 +29,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var list<string>
+     */
+    protected $connection = 'mysql';
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
