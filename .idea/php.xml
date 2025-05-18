@@ -128,6 +128,7 @@
       <path value="$PROJECT_DIR$/src/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/src/vendor/ramsey/collection" />
       <path value="$PROJECT_DIR$/src/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/src/vendor/laravel/sanctum" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
