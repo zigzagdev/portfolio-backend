@@ -16,7 +16,7 @@ class UserDuplicationCheckerTest extends TestCase
         parent::setUp();
 
         $this->repository = $this->getMockBuilder(UserRepositoryInterface::class)
-            ->onlyMethods(['existsByEmail', 'save'])
+            ->onlyMethods(['existsByEmail', 'save', 'findById'])
             ->getMock();
     }
 

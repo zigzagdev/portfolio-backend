@@ -16,8 +16,8 @@ class User_RegisterTest extends TestCase
 
     protected function tearDown(): void
     {
-        parent::tearDown();
         $this->refresh();
+        parent::tearDown();
     }
 
     protected function refresh()
@@ -38,7 +38,7 @@ class User_RegisterTest extends TestCase
         $request = [
             'first_name' => 'Cristiano',
             'last_name' => 'Ronaldo',
-            'email' => 'manchester7@test.com',
+            'email' => 'manchester_united7@test.com',
             'password' => 'test1234',
             'bio' => null,
             'location' => null,
@@ -51,7 +51,6 @@ class User_RegisterTest extends TestCase
                 'api/user/register',
                 $request
             );
-
         $this->assertEquals(201, $response->getStatusCode());
     }
 
@@ -64,7 +63,7 @@ class User_RegisterTest extends TestCase
         $request = [
             'first_name' => 'Lionel',
             'last_name' => 'Messi',
-            'email' => 'barcelona10@test.com',
+            'email' => 'barcelona_10@test.com',
             'password' => 'test1234',
             'bio' => 'I am a football player',
             'location' => 'Barcelona',
