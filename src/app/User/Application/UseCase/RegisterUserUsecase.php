@@ -9,7 +9,7 @@ use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\Factory\UserEntityFactory;
 use App\User\Application\Factory\RegisterUserDtoFactory;
 
-class RegisterUserUseCase
+class RegisterUserUsecase
 {
     public function __construct(
         readonly private UserRepositoryInterface $repository,
