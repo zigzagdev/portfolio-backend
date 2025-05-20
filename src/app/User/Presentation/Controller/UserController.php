@@ -7,7 +7,7 @@ use App\User\Application\Factory\RegisterUserCommandFactory;
 use App\User\Presentation\ViewModel\Factory\RegisterUserViewModelFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\User\Application\UseCase\RegisterUserUseCase;
+use App\User\Application\UseCase\RegisterUserUsecase;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function createUser(
         Request $request,
-        RegisterUserUseCase $useCase
+        RegisterUserUsecase $useCase
     ): JsonResponse
     {
         DB::connection('mysql')->beginTransaction();
