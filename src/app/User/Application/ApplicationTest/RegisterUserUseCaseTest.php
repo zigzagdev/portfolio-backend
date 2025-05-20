@@ -2,7 +2,7 @@
 
 namespace App\User\Application\ApplicationTest;
 
-use App\User\Application\UseCase\RegisterUserUsecase;
+use App\User\Application\UseCase\RegisterUserUseCase;
 use App\User\Infrastructure\Repository\UserRepository;
 use App\User\Domain\Factory\UserEntityFactory;
 use App\User\Application\Dto\RegisterUserDto;
@@ -165,7 +165,7 @@ class RegisterUserUseCaseTest extends TestCase
      */
     public function test(): void
     {
-        $usecase = new RegisterUserUsecase(
+        $usecase = new RegisterUserUseCase(
             $this->mockRepository(),
             $this->mockPasswordHasher()
         );

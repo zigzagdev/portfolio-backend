@@ -3,7 +3,7 @@
 namespace App\User\Presentation\PresentationTest\Controller;
 
 use App\Common\Domain\UserId;
-use App\User\Application\UseCase\RegisterUserUsecase;
+use App\User\Application\UseCase\RegisterUserUseCase;
 use App\User\Application\UseCommand\RegisterUserCommand;
 use App\User\Presentation\Controller\UserController;
 use App\User\Application\Dto\RegisterUserDto;
@@ -101,9 +101,9 @@ class UserController_registerTest extends TestCase
         return $command;
     }
 
-    private function mockUseCase(): RegisterUserUsecase
+    private function mockUseCase(): RegisterUserUseCase
     {
-        $useCase = Mockery::mock(RegisterUserUsecase::class);
+        $useCase = Mockery::mock(RegisterUserUseCase::class);
 
         $useCase
             ->shouldReceive('handle')
