@@ -4,7 +4,9 @@ namespace App\User\Presentation\Controller;
 
 use App\Http\Controllers\Controller;
 use App\User\Application\Factory\RegisterUserCommandFactory;
+use App\User\Application\UseCase\ShowUserUseCase;
 use App\User\Presentation\ViewModel\Factory\RegisterUserViewModelFactory;
+use App\User\Presentation\ViewModel\ShowUserViewModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\User\Application\UseCase\RegisterUserUsecase;
@@ -39,5 +41,19 @@ class UserController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function showUser(
+        int $id,
+        ShowUserUseCase $useCase
+    ): JsonResponse
+    {
+        $dto = $useCase->handle($id);
+        $viewModel = ShowUserViewModel::buildFromDto($dto);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $viewModel->toArray(),
+        ], 200);
     }
 }
