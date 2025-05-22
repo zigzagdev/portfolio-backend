@@ -29,6 +29,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The database connection that should be used by the model.
+     *
+     * @var string
+     */
+    protected $connection = 'mysql';
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>

@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\User\Presentation\Controller\UserController;
+use Illuminate\Support\Facades\Route;
 
-Route::post('user/register', [UserController::class, 'createUser'])->name('user.register');
+Route::prefix('user')->name('user.')->group(function () {
+    Route::post('register', [UserController::class, 'createUser'])->name('register');
+    Route::get('show/{id}', [UserController::class, 'showUser'])->name('show');
+});

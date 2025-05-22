@@ -121,6 +121,14 @@ class RegisterUserUseCaseTest extends TestCase
             ->shouldReceive('save')
             ->andReturn($this->mockEntity());
 
+        $repository
+            ->shouldReceive('existsByEmail')
+            ->never();
+
+        $repository
+            ->shouldReceive('findById')
+            ->never();
+
         return $repository;
     }
 

@@ -2,15 +2,17 @@
 
 namespace App\User\Infrastructure\InfrastructureTest;
 
+use App\Models\User;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserEntityFactory;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Infrastructure\Repository\UserRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Mockery;
 use Tests\TestCase;
 
-class UserRepositoryTest extends TestCase
+class UserRepository_addUserTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -50,15 +52,21 @@ class UserRepositoryTest extends TestCase
     {
         $this->repository->save($this->mockEntity());
 
+
+        $expectedSkills = "\\\"Football\\\", \\\"Leadership\\\"";
+
         $this->assertDatabaseHas('users', [
             'first_name' => $this->mockRequest()['first_name'],
             'last_name' => $this->mockRequest()['last_name'],
             'email' => $this->mockRequest()['email'],
             'bio' => $this->mockRequest()['bio'],
             'location' => $this->mockRequest()['location'],
-            'skills' => json_encode($this->mockRequest()['skills'], JSON_UNESCAPED_UNICODE),
             'profile_image' => $this->mockRequest()['profile_image'],
         ], 'mysql');
+
+        $user = User::where('email', 'real-madrid15@test.com')->first();
+        $this->assertEquals(['Football', 'Leadership'], $user->skills);
+
     }
 
     private function mockRequest(): array
@@ -87,6 +95,6 @@ class UserRepositoryTest extends TestCase
 
     private function mockEntity(): UserEntity
     {
-        return UserEntityFactory::build($this->mockRequest(), $this->hasher); // ✅ 変更
+        return UserEntityFactory::build($this->mockRequest(), $this->hasher);
     }
 }
