@@ -67,7 +67,7 @@ class UserUpdateEntityFactoryTest extends TestCase
 
     /**
      * @test
-     * @testdox UserUpdateEntityFactory_build_successfully check partially update date
+     * @testdox UserUpdateEntityFactory_build_successfully check partially update data
      */
     public function test3(): void
     {
