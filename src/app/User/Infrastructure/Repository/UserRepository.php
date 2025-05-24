@@ -6,6 +6,7 @@ use App\Common\Domain\UserId;
 use App\Models\User;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
+use App\User\Domain\Factory\UserUpdateEntityFactory;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
@@ -52,5 +53,18 @@ class UserRepository implements UserRepositoryInterface
         }
 
         return UserFromModelEntityFactory::buildFromModel($findUser);
+    }
+
+    public function update(
+        UserEntity $entity
+    ): UserEntity
+    {
+        $targetUser = User::find($entity->getUserId()->getValue());
+
+        if ($targetUser === null) {
+            throw new Exception('User not found');
+        }
+
+        return UserUpdateEntityFactory::build($entity);
     }
 }

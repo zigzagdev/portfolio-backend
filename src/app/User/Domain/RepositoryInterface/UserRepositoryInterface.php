@@ -13,4 +13,6 @@ interface UserRepositoryInterface
     public function existsByEmail(Email $email): bool;
 
     public function findById(UserId $id): UserEntity;
+
+    public function update(UserEntity $entity): UserEntity;
 }
