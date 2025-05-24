@@ -44,12 +44,12 @@ class UpdateUserCommand
 
     public function getBio(): ?string
     {
-        return $this->bio ?? null;
+        return $this->bio;
     }
 
     public function getLocation(): ?string
     {
-        return $this->location ?? null;
+        return $this->location;
     }
 
     public function getSkills(): array
