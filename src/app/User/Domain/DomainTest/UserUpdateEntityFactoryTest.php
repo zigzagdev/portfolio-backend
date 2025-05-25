@@ -2,6 +2,7 @@
 
 namespace App\User\Domain\DomainTest;
 
+use App\User\Application\UseCommand\UpdateUserCommand;
 use Mockery;
 use Tests\TestCase;
 use App\User\Domain\Entity\UserEntity;
@@ -36,43 +37,43 @@ class UserUpdateEntityFactoryTest extends TestCase
         ];
     }
 
-    private function mockEntity(): UserEntity
+    private function mockCommand(): UpdateUserCommand
     {
-        $entity = Mockery::mock(UserEntity::class);
+        $command = Mockery::mock(UpdateUserCommand::class);
 
-        $entity
-            ->shouldReceive('getUserId')
-            ->andReturn(new UserId($this->arrayRequestData()['id']));
+        $command
+            ->shouldReceive('getId')
+            ->andReturn($this->arrayRequestData()['id']);
 
-        $entity
+        $command
             ->shouldReceive('getFirstName')
             ->andReturn($this->arrayRequestData()['first_name']);
 
-        $entity
+        $command
             ->shouldReceive('getLastName')
             ->andReturn($this->arrayRequestData()['last_name']);
 
-        $entity
+        $command
             ->shouldReceive('getEmail')
-            ->andReturn(new Email($this->arrayRequestData()['email']));
+            ->andReturn($this->arrayRequestData()['email']);
 
-        $entity
+        $command
             ->shouldReceive('getBio')
             ->andReturn($this->arrayRequestData()['bio']);
 
-        $entity
+        $command
             ->shouldReceive('getLocation')
             ->andReturn($this->arrayRequestData()['location']);
 
-        $entity
+        $command
             ->shouldReceive('getSkills')
             ->andReturn($this->arrayRequestData()['skills']);
 
-        $entity
+        $command
             ->shouldReceive('getProfileImage')
             ->andReturn($this->arrayRequestData()['profile_image']);
 
-        return $entity;
+        return $command;
     }
 
     /**
@@ -81,7 +82,7 @@ class UserUpdateEntityFactoryTest extends TestCase
      */
     public function test1(): void
     {
-        $result = UserUpdateEntityFactory::build($this->mockEntity());
+        $result = UserUpdateEntityFactory::build($this->mockCommand());
 
         $this->assertInstanceOf(UserEntity::class, $result);
     }
@@ -92,7 +93,7 @@ class UserUpdateEntityFactoryTest extends TestCase
      */
     public function test2(): void
     {
-        $result = UserUpdateEntityFactory::build($this->mockEntity());
+        $result = UserUpdateEntityFactory::build($this->mockCommand());
 
         $this->assertEquals($result->getFirstName(), $this->arrayRequestData()['first_name']);
         $this->assertEquals($result->getLastName(), $this->arrayRequestData()['last_name']);
@@ -120,41 +121,41 @@ class UserUpdateEntityFactoryTest extends TestCase
             'profile_image' => 'https://example.com/profile.jpg',
         ];
 
-        $partiallyEntity = Mockery::mock(UserEntity::class);
+        $partiallyCommand = Mockery::mock(UpdateUserCommand::class);
 
-        $partiallyEntity
-            ->shouldReceive('getUserId')
-            ->andReturn(new UserId($partiallyData['id']));
+        $partiallyCommand
+            ->shouldReceive('getId')
+            ->andReturn($partiallyData['id']);
 
-        $partiallyEntity
+        $partiallyCommand
             ->shouldReceive('getFirstName')
             ->andReturn($partiallyData['first_name']);
 
-        $partiallyEntity
+        $partiallyCommand
             ->shouldReceive('getLastName')
             ->andReturn($partiallyData['last_name']);
 
-        $partiallyEntity
+        $partiallyCommand
             ->shouldReceive('getEmail')
-            ->andReturn(new Email($partiallyData['email']));
+            ->andReturn($partiallyData['email']);
 
-        $partiallyEntity
+        $partiallyCommand
             ->shouldReceive('getBio')
             ->andReturn(null);
 
-        $partiallyEntity
+        $partiallyCommand
             ->shouldReceive('getLocation')
             ->andReturn($partiallyData['location']);
 
-        $partiallyEntity
-            ->shouldReceive('getSkills')
-            ->andReturn($partiallyData['skills']);
-
-        $partiallyEntity
+        $partiallyCommand
             ->shouldReceive('getProfileImage')
             ->andReturn($partiallyData['profile_image']);
 
-        $result = UserUpdateEntityFactory::build($partiallyEntity);
+        $partiallyCommand
+            ->shouldReceive('getSkills')
+            ->andReturn($partiallyData['skills']);
+
+        $result = UserUpdateEntityFactory::build($partiallyCommand);
 
         $this->assertEquals($result->getFirstName(), $partiallyData['first_name']);
         $this->assertEquals($result->getLastName(), $partiallyData['last_name']);

@@ -2,23 +2,28 @@
 
 namespace App\User\Domain\Factory;
 
+use App\User\Application\UseCommand\UpdateUserCommand;
 use App\User\Domain\Entity\UserEntity;
 use App\Common\Domain\UserId;
 use App\User\Domain\ValueObject\Email;
 
 class UserUpdateEntityFactory
 {
-    public static function build(UserEntity $entity): UserEntity
+    public static function build(
+        UpdateUserCommand $command
+    ): UserEntity
     {
+        $commandArray = $command->toArray();
+
         return new UserEntity(
-            id: new Userid($entity->getUserId()?->getValue()),
-            firstName: $entity->getFirstName(),
-            lastName: $entity->getLastName(),
-            email: new Email($entity->getEmail()->getValue()),
-            bio: $entity->getBio() ?? null,
-            location: $entity->getLocation() ?? null,
-            skills: $entity->getSkills() ?? [],
-            profileImage: $entity->getProfileImage() ?? null,
+            id: new UserId($commandArray['id']),
+            firstName: $commandArray['first_name'],
+            lastName: $commandArray['last_name'],
+            email: new Email($commandArray['email']),
+            bio: isset($commandArray['bio']) ? $commandArray['bio'] : null,
+            location: isset($commandArray['location']) ? $commandArray['location'] : null,
+            skills: isset($commandArray['skills']) ? $commandArray['skills'] : [],
+            profileImage: isset($commandArray['profile_image']) ? $commandArray['profile_image'] : null
         );
     }
 }
