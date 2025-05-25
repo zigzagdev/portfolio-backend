@@ -103,4 +103,17 @@ class UpdateUserCommand
         'skills',
         'profile_image'
     ];
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'first_name' => $this->getFirstName(),
+            'last_name' => $this->getLastName(),
+            'bio' => $this->getBio(),
+            'location' => $this->getLocation(),
+            'skills' => $this->getSkills(),
+            'profile_image' => $this->getProfileImage(),
+        ];
+    }
 }

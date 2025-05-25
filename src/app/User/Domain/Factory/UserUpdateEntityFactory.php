@@ -13,15 +13,17 @@ class UserUpdateEntityFactory
         UpdateUserCommand $command
     ): UserEntity
     {
+        $commandArray = $command->toArray();
+
         return new UserEntity(
-            id: new Userid($command->getId()),
-            firstName: $command->getFirstName(),
-            lastName: $command->getLastName(),
-            email: new Email($command->getEmail()),
-            bio: $command->getBio(),
-            location: $command->getLocation(),
-            skills: $command->getSkills(),
-            profileImage: $command->getProfileImage()
+            id: new UserId($commandArray['id']),
+            firstName: $commandArray['first_name'],
+            lastName: $commandArray['last_name'],
+            email: new Email($commandArray['email']),
+            bio: isset($commandArray['bio']) ? $commandArray['bio'] : null,
+            location: isset($commandArray['location']) ? $commandArray['location'] : null,
+            skills: isset($commandArray['skills']) ? $commandArray['skills'] : [],
+            profileImage: isset($commandArray['profile_image']) ? $commandArray['profile_image'] : null
         );
     }
 }
