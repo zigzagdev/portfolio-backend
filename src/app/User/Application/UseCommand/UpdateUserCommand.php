@@ -2,7 +2,6 @@
 
 namespace App\User\Application\UseCommand;
 
-use App\Common\Domain\UserId;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 
@@ -63,10 +62,14 @@ class UpdateUserCommand
     }
 
     public static function build(
+        int $id,
         Request $request
     ): self
     {
-        $requestArray = $request->toArray();
+        $requestArray = array_merge(
+            $request->toArray(),
+            ['id' => $id]
+        );
         self::validation($requestArray);
 
         return new self(
