@@ -113,6 +113,7 @@ class UpdateUserCommand
             'id' => $this->getId(),
             'first_name' => $this->getFirstName(),
             'last_name' => $this->getLastName(),
+            'email' => $this->getEmail(),
             'bio' => $this->getBio(),
             'location' => $this->getLocation(),
             'skills' => $this->getSkills(),

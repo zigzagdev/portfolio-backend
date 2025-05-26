@@ -21,7 +21,8 @@ class UserRepository_updateTest extends TestCase
         $this->refresh();
         $this->user = $this->initialInsert();
         $this->repository = new UserRepository(
-            $this->mockHasher()
+            $this->mockHasher(),
+            new User()
         );
     }
 
