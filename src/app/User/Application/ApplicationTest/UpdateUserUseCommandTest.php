@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Tests\TestCase;
 use Mockery;
 
-class UpdateUserCommandTest extends TestCase
+class UpdateUserUseCommandTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -25,7 +25,10 @@ class UpdateUserCommandTest extends TestCase
      */
     public function test1(): void
     {
-        $result = UpdateUserCommand::build($this->mockRequest());
+        $result = UpdateUserCommand::build(
+            $this->arrayRequestData()['id'],
+            $this->mockRequest()
+        );
 
         $this->assertInstanceOf(UpdateUserCommand::class, $result);
     }
@@ -36,7 +39,10 @@ class UpdateUserCommandTest extends TestCase
      */
     public function test2(): void
     {
-        $result = UpdateUserCommand::build($this->mockRequest());
+        $result = UpdateUserCommand::build(
+            $this->arrayRequestData()['id'],
+            $this->mockRequest()
+        );
         foreach ($this->arrayRequestData() as $key => $expectedValue) {
             $camelKey = lcfirst(str_replace('_', '', ucwords($key, '_')));
             $getter = 'get' . ucfirst($camelKey);

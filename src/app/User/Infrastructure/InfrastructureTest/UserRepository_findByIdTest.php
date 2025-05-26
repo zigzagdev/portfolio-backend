@@ -27,7 +27,8 @@ class UserRepository_findByIdTest extends TestCase
         $this->refresh();
         $this->user = new User();
         $this->repository = new UserRepository(
-            $this->mockHasher()
+            $this->mockHasher(),
+            $this->user
         );
     }
 

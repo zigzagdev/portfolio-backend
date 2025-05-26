@@ -59,13 +59,13 @@ class UserRepository implements UserRepositoryInterface
         UserEntity $entity
     ): UserEntity
     {
-        $targetUser = $this->user->findById($entity->getUserId());
+        $targetUser = $this->user->find($entity->getUserId()->getValue());
 
         if ($targetUser === null) {
             throw new Exception('User not found');
         }
 
-        $this->user->update(
+        $targetUser->update(
             [
                 'id' => $targetUser->id,
                 'first_name' => $entity->getFirstName(),

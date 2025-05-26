@@ -61,13 +61,17 @@ class UserController extends Controller
     }
 
     public function update(
+        int $id,
         Request $request,
         UpdateUseCase $useCase
     ): JsonResponse
     {
         DB::connection('mysql')->beginTransaction();
         try {
-            $command = UpdateUserCommand::build($request);
+            $command = UpdateUserCommand::build(
+                $id,
+                $request
+            );
 
             $dto = $useCase->handle($command);
 

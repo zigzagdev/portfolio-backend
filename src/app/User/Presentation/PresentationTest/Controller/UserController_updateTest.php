@@ -153,6 +153,7 @@ class UserController_updateTest extends TestCase
 
         $result = $this->controller
             ->update(
+                $this->arrayTestData()['id'],
                 $this->mockRequest(),
                 $useCase,
             );
