@@ -24,7 +24,10 @@ class UserRepository_addUserTest extends TestCase
         parent::setUp();
 
         $this->hasher = $this->mockHasher();
-        $this->repository = new UserRepository($this->hasher);
+        $this->repository = new UserRepository(
+            $this->hasher,
+            new User()
+        );
     }
 
     protected function tearDown(): void

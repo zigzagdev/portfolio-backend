@@ -10,6 +10,9 @@ use App\User\Presentation\ViewModel\ShowUserViewModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\User\Application\UseCase\RegisterUserUsecase;
+use App\User\Application\UseCase\UpdateUseCase;
+use App\User\Application\UseCommand\UpdateUserCommand;
+use App\User\Presentation\ViewModel\UpdateUserViewModel;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -55,5 +58,36 @@ class UserController extends Controller
             'status' => 'success',
             'data' => $viewModel->toArray(),
         ], 200);
+    }
+
+    public function update(
+        int $id,
+        Request $request,
+        UpdateUseCase $useCase
+    ): JsonResponse
+    {
+        DB::connection('mysql')->beginTransaction();
+        try {
+            $command = UpdateUserCommand::build(
+                $id,
+                $request
+            );
+
+            $dto = $useCase->handle($command);
+
+            DB::connection('mysql')->commit();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => UpdateUserViewModel::buildFromDto($dto)->toArray(),
+            ], 200);
+        } catch (Exception $e) {
+            DB::connection('mysql')->rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

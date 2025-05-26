@@ -15,7 +15,8 @@ use Exception;
 class UserRepository implements UserRepositoryInterface
 {
     public function __construct(
-        private readonly PasswordHasherInterface $hasher
+        private readonly PasswordHasherInterface $hasher,
+        private readonly User $user
     ) {}
 
     public function save(UserEntity $entity): ?UserEntity
@@ -24,7 +25,7 @@ class UserRepository implements UserRepositoryInterface
             ? $entity->getPassword()->getHashedPassword()
             : throw new LogicException('Password is missing.');
 
-        $model = User::create([
+        $model = $this->user->create([
             'first_name' => $entity->getFirstName(),
             'last_name' => $entity->getLastName(),
             'email' => $entity->getEmail()->getValue(),
@@ -40,17 +41,43 @@ class UserRepository implements UserRepositoryInterface
 
     public function existsByEmail(Email $email): bool
     {
-        return User::where('email', $email->getValue())->exists();
+        return $this->user->where('email', $email->getValue())->exists();
     }
 
     public function findById(UserId $id): UserEntity
     {
-        $findUser = User::find($id->getValue());
+        $findUser = $this->user->find($id->getValue());
 
         if ($findUser === null) {
             throw new Exception('User not found');
         }
 
         return UserFromModelEntityFactory::buildFromModel($findUser);
+    }
+
+    public function update(
+        UserEntity $entity
+    ): UserEntity
+    {
+        $targetUser = $this->user->find($entity->getUserId()->getValue());
+
+        if ($targetUser === null) {
+            throw new Exception('User not found');
+        }
+
+        $targetUser->update(
+            [
+                'id' => $targetUser->id,
+                'first_name' => $entity->getFirstName(),
+                'last_name' => $entity->getLastName(),
+                'email' => $entity->getEmail()->getValue(),
+                'bio' => $entity->getBio(),
+                'location' => $entity->getLocation(),
+                'skills' => json_encode($entity->getSkills()),
+                'profile_image' => $entity->getProfileImage()
+            ]
+        );
+
+        return UserFromModelEntityFactory::buildFromModel($this->user->find($entity->getUserId()->getValue()));
     }
 }
