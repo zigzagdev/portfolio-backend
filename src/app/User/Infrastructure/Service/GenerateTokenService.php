@@ -13,7 +13,7 @@ class GenerateTokenService implements GenerateTokenInterface
         private readonly string $secretKey,
         private readonly string $algorithm = 'HS256'
     ) {}
-    public function generate(UserEntity $user): string
+    public function generate(UserEntity $user): AuthToken
     {
         $payload = [
             'sub' => $user->getUserId()->getValue(),
@@ -22,6 +22,8 @@ class GenerateTokenService implements GenerateTokenInterface
             'exp' => time() + 3600,
         ];
 
-        return JWT::encode($payload, $this->secretKey, $this->algorithm);
+        return new AuthToken(
+            JWT::encode($payload, $this->secretKey, $this->algorithm)
+        );
     }
 }

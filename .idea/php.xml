@@ -129,6 +129,7 @@
       <path value="$PROJECT_DIR$/src/vendor/ramsey/collection" />
       <path value="$PROJECT_DIR$/src/vendor/ramsey/uuid" />
       <path value="$PROJECT_DIR$/src/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/src/vendor/firebase/php-jwt" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

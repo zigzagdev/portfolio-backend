@@ -1,9 +1,9 @@
 <?php
 
-namespace App\User\Infrastructure;
+namespace User\Infrastructure\Service;
 
-use Illuminate\Support\Facades\Hash;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
+use Illuminate\Support\Facades\Hash;
 
 class BcryptPasswordHasher implements PasswordHasherInterface
 {
