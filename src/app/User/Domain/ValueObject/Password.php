@@ -32,4 +32,9 @@ final class Password
     {
         return $this->value;
     }
+
+    public function matches(Password $hashedPassword, PasswordHasherInterface $hasher): bool
+    {
+        return $hasher->check($this->value, $hashedPassword->getHashedPassword());
+    }
 }

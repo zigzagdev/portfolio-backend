@@ -11,4 +11,9 @@ class BcryptPasswordHasher implements PasswordHasherInterface
     {
         return Hash::make($plain);
     }
+
+    public function check(string $plain, string $hashed): bool
+    {
+        return Hash::check($plain, $hashed);
+    }
 }
