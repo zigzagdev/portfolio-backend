@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6952a861-17ec-40ad-b866-c564752c14a8" name="変更" comment="fix: test-environment-fix">
+      <change afterPath="$PROJECT_DIR$/src/app/User/Infrastructure/InfrastructureTest/JwtAuthServiceTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/User/Infrastructure/Service/JwtAuthService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/User/Domain/RepositoryInterface/PasswordHasherInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Domain/RepositoryInterface/PasswordHasherInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/User/Domain/RepositoryInterface/UserRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Domain/RepositoryInterface/UserRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/User/Domain/ValueObject/Password.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Domain/ValueObject/Password.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/User/Infrastructure/BcryptPasswordHasher.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Infrastructure/BcryptPasswordHasher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/User/Infrastructure/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Infrastructure/Repository/UserRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +167,7 @@
     "PHPUnit.メイン.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/user-login-domain",
+    "git-widget-placeholder": "feature/user-login-infra-authservice",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",

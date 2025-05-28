@@ -44,6 +44,17 @@ class UserRepository implements UserRepositoryInterface
         return $this->user->where('email', $email->getValue())->exists();
     }
 
+    public function findByEmail(Email $email): ?UserEntity
+    {
+        $findUser = $this->user->where('email', $email->getValue())->first();
+
+        if ($findUser === null) {
+            return null;
+        }
+
+        return UserFromModelEntityFactory::buildFromModel($findUser);
+    }
+
     public function findById(UserId $id): UserEntity
     {
         $findUser = $this->user->find($id->getValue());
