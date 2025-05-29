@@ -9,6 +9,8 @@ use Firebase\JWT\JWT;
 
 class GenerateTokenService implements GenerateTokenInterface
 {
+    const VALID_TOKEN_TIME = 3600;
+
     public function __construct(
         private readonly string $secretKey,
         private readonly string $algorithm = 'HS256'
@@ -19,7 +21,7 @@ class GenerateTokenService implements GenerateTokenInterface
             'sub' => $user->getUserId()->getValue(),
             'email' => $user->getEmail()->getValue(),
             'iat' => time(),
-            'exp' => time() + 3600,
+            'exp' => time() + self::VALID_TOKEN_TIME,
         ];
 
         return new AuthToken(
