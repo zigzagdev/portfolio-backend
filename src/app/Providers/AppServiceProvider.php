@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
-use App\User\Infrastructure\BcryptPasswordHasher;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Infrastructure\Repository\UserRepository;
+use Illuminate\Support\ServiceProvider;
+use User\Infrastructure\Service\BcryptPasswordHasher;
+use App\User\Domain\Service\GenerateTokenInterface;
+use User\Infrastructure\Service\GenerateTokenService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,13 @@ class AppServiceProvider extends ServiceProvider
             UserRepositoryInterface::class,
             UserRepository::class
         );
+
+//        $this->app->bind(GenerateTokenInterface::class, function () {
+//            return new GenerateTokenService(
+//                config('auth.jwt_secret'),
+//                'HS256'
+//            );
+//        });
 
     }
 

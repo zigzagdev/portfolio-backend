@@ -1,6 +1,6 @@
 <?php
 
-namespace App\User\Infrastructure\InfrastructureTest;
+namespace User\Infrastructure\InfrastructureTest;
 
 use App\Common\Domain\UserId;
 use App\Models\User;
@@ -9,7 +9,6 @@ use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Infrastructure\Repository\UserRepository;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-use App\User\Domain\Service\AuthServiceInterface;
 use Mockery;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\ValueObject\Email;
@@ -19,6 +18,8 @@ use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 
 class JwtAuthServiceTest extends TestCase
 {
+    private string $secretKey = 'test-secret-key';
+    private string $algorithm = 'HS256';
     protected function setUp(): void
     {
         parent::setUp();
