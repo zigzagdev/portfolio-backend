@@ -112,4 +112,16 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    /*
+     *|--------------------------------------------------------------------------
+     *| JWT Secret Key
+     *|--------------------------------------------------------------------------
+     *|
+     *| This is the secret key used to sign your JWT tokens. It should be stored
+     *| securely in your environment file and never hardcoded.
+     *|
+     *
+     */
+
+    'jwt_secret' => env('JWT_SECRET'),
 ];

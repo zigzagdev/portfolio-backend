@@ -32,7 +32,10 @@ class JwtAuthService implements AuthServiceInterface
             return null;
         }
 
-        if (!Hash::check($password->getHashedPassword(), $user->getPassword()?->getHashedPassword())) {
+        $inputPassword = Password::fromPlainText($password->__toString(), $this->passwordHasher);
+        $storedPassword = Password::fromHashed($user->getPassword()?->getHashedPassword());
+
+        if (!$inputPassword->matches($storedPassword, $this->passwordHasher)) {
             return null;
         }
 
