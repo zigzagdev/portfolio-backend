@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Infrastructure\Service;
+namespace App\User\Infrastructure\Service;
 
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use Illuminate\Support\Facades\Hash;
