@@ -4,6 +4,7 @@ namespace App\User\Presentation\Controller;
 
 use App\Http\Controllers\Controller;
 use App\User\Application\Factory\RegisterUserCommandFactory;
+use App\User\Application\UseCase\LoginUserUseCase;
 use App\User\Application\UseCase\ShowUserUseCase;
 use App\User\Presentation\ViewModel\Factory\RegisterUserViewModelFactory;
 use App\User\Presentation\ViewModel\ShowUserViewModel;
@@ -83,6 +84,37 @@ class UserController extends Controller
             ], 200);
         } catch (Exception $e) {
             DB::connection('mysql')->rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function login(
+        Request $request,
+        LoginUserUseCase $useCase
+    ): JsonResponse
+    {
+        try {
+            $requestEmail = $request->input('email');
+            $requestPassword = $request->input('password');
+
+            $dto = $useCase->handle(
+                $requestEmail,
+                $requestPassword
+            );
+
+            return response()->json([
+                'status' => 'success',
+                'data' => [
+                    'token' => $dto->getToken(),
+                    'user' => $dto->toArray()
+                ],
+            ], 200);
+
+        } catch (Exception $e) {
 
             return response()->json([
                 'status' => 'error',
