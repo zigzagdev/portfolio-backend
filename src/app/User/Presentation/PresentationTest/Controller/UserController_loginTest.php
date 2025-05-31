@@ -76,7 +76,6 @@ class UserController_loginTest extends TestCase
         $request
             ->shouldReceive('input')
             ->with('password')
-            ->with('password')
             ->andReturn($this->arrayRequestData()['password']);
 
         return $request;
