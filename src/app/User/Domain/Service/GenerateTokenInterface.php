@@ -12,5 +12,5 @@ interface GenerateTokenInterface
      * @param UserEntity $user
      * @return AuthToken
      */
-    public function issue(UserEntity $user): AuthToken;
+    public function generate(UserEntity $user): AuthToken;
 }

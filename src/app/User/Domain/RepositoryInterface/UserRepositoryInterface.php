@@ -15,4 +15,6 @@ interface UserRepositoryInterface
     public function findById(UserId $id): UserEntity;
 
     public function update(UserEntity $entity): UserEntity;
+
+    public function findByEmail(Email $email): ?UserEntity;
 }

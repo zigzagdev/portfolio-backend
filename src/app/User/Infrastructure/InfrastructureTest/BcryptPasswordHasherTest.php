@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Infrastructure\Auth;
 
-use Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
-use App\User\Infrastructure\BcryptPasswordHasher;
+use Tests\TestCase;
+use User\Infrastructure\Service\BcryptPasswordHasher;
 
 class BcryptPasswordHasherTest extends TestCase
 {
