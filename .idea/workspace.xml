@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6952a861-17ec-40ad-b866-c564752c14a8" name="変更" comment="fix: test-environment-fix">
-      <change afterPath="$PROJECT_DIR$/src/app/User/Presentation/PresentationTest/Controller/UserController_updateTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/User/Tests/User_loginTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/User/Presentation/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Presentation/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/User/Domain/ValueObject/Password.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Domain/ValueObject/Password.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/User/Infrastructure/Service/BcryptPasswordHasher.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Infrastructure/Service/BcryptPasswordHasher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/User/Infrastructure/Service/JwtAuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/User/Infrastructure/Service/JwtAuthService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +152,7 @@
       <path value="$PROJECT_DIR$/src/vendor/ramsey/collection" />
       <path value="$PROJECT_DIR$/src/vendor/ramsey/uuid" />
       <path value="$PROJECT_DIR$/src/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/src/vendor/firebase/php-jwt" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -162,13 +168,20 @@
     "PHPUnit.メイン.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/edit-user-controller",
+    "git-widget-placeholder": "feature/user-login-test",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "Settings.JavaScript"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/User/Infrastructure/Service" />
+      <recent name="$PROJECT_DIR$/src/app/User/Infrastructure" />
+      <recent name="$PROJECT_DIR$/src/app/User/Domain/Service" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="メイン" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/src/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />

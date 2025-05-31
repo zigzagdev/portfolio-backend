@@ -2,11 +2,15 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
-use App\User\Infrastructure\BcryptPasswordHasher;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Infrastructure\Repository\UserRepository;
+use App\User\Infrastructure\Service\JwtAuthService;
+use Illuminate\Support\ServiceProvider;
+use App\User\Infrastructure\Service\BcryptPasswordHasher;
+use App\User\Domain\Service\GenerateTokenInterface;
+use App\User\Infrastructure\Service\GenerateTokenService;
+use App\User\Domain\Service\AuthServiceInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +29,20 @@ class AppServiceProvider extends ServiceProvider
             UserRepository::class
         );
 
+        $this->app->bind(GenerateTokenInterface::class, function () {
+            $secretKey = config('auth.jwt_secret');
+            return new GenerateTokenService($secretKey);
+        });
+
+        $this->app->bind(
+            AuthServiceInterface::class,
+            JwtAuthService::class
+        );
+
+        $this->app->bind(
+            PasswordHasherInterface::class,
+            BcryptPasswordHasher::class
+        );
     }
 
     /**
