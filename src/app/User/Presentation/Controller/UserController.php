@@ -14,7 +14,9 @@ use App\User\Application\UseCase\RegisterUserUsecase;
 use App\User\Application\UseCase\UpdateUseCase;
 use App\User\Application\UseCommand\UpdateUserCommand;
 use App\User\Presentation\ViewModel\UpdateUserViewModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\User\Application\UseCase\LogoutUserUseCase;
 use Exception;
 
 class UserController extends Controller
@@ -120,6 +122,24 @@ class UserController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage(),
             ], 500);
+        }
+    }
+
+    public function logout(
+        LogoutUserUseCase $useCase
+    ): void
+    {
+        try {
+            $authUser = Auth::user();
+
+            if (!$authUser) {
+                throw new Exception('User not authenticated');
+            }
+
+            $useCase->handle($authUser->id);
+
+        } catch (Exception $e) {
+            throw new Exception('Logout failed: ' . $e->getMessage());
         }
     }
 }
