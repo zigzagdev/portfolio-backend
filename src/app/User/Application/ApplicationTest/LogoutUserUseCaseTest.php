@@ -36,15 +36,14 @@ class LogoutUserUseCaseTest extends TestCase
     private function mockEntity(): UserEntity
     {
         $factory = Mockery::mock(
-            'alias' . UserEntityFactory::class
+            'alias:' . UserEntityFactory::class
         );
 
         $entity = Mockery::mock(UserEntity::class);
 
         $factory
             ->shouldReceive('build')
-            ->with($this->arrayData())
-            ->with($this->mockPasswordHasher())
+            ->with($this->arrayData(), $this->mockPasswordHasher())
             ->andReturn($entity);
 
         $entity
