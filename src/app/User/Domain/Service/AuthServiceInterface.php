@@ -13,4 +13,8 @@ interface AuthServiceInterface
         Password $password
     )
     : ?UserEntity;
+
+    public function attemptLogout(
+        UserEntity $user
+    ): void;
 }
