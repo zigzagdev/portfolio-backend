@@ -3,6 +3,8 @@
 namespace App\User\Application\ApplicationTest;
 
 use App\Common\Domain\UserId;
+use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
+use App\User\Infrastructure\Repository\UserRepository;
 use Tests\TestCase;
 use App\User\Application\UseCase\LogoutUserUseCase;
 use App\User\Domain\Service\AuthServiceInterface;
@@ -26,9 +28,13 @@ class LogoutUserUseCaseTest extends TestCase
     public function test_succeeded(): void
     {
         $authService = $this->mockAuthService();
-        $useCase = new LogoutUserUseCase($authService);
+        $repository = $this->mockRepository();
+        $useCase = new LogoutUserUseCase(
+            $authService,
+            $repository
+        );
 
-        $useCase->handle($this->mockEntity());
+        $useCase->handle($this->arrayData()['id']);
 
         $this->assertInstanceOf(LogoutUserUseCase::class, $useCase);
     }
@@ -83,6 +89,20 @@ class LogoutUserUseCaseTest extends TestCase
             ->andReturn($this->arrayData()['profile_image']);
 
         return $entity;
+    }
+
+    private function mockRepository(): UserRepositoryInterface
+    {
+        $interface = Mockery::mock(
+            UserRepositoryInterface::class
+        );
+
+        $interface
+            ->shouldReceive('findById')
+            ->with(Mockery::type(UserId::class))
+            ->andReturn($this->mockEntity());
+
+        return $interface;
     }
 
     private function mockPasswordHasher(): PasswordHasherInterface
