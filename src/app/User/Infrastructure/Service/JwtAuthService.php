@@ -41,4 +41,12 @@ class JwtAuthService implements AuthServiceInterface
 
         return $user;
     }
+
+    public function attemptLogout(UserEntity $user): void
+    {
+        // In a JWT-based system, logout is typically handled by removing the token from the client side.
+        // However, if you want to implement server-side token invalidation, you can do so here.
+        // For example, you could maintain a blacklist of tokens or change the user's password to invalidate existing tokens.
+        // This is a placeholder for such logic.
+    }
 }
