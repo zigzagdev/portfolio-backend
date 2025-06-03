@@ -2,15 +2,14 @@
 
 namespace App\User\Application\ApplicationTest;
 
+use App\User\Application\Dto\RegisterUserDto;
+use App\User\Application\Factory\RegisterUserDtoFactory;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserEntityFactory;
-use Tests\TestCase;
-use App\User\Application\Factory\RegisterUserDtoFactory;
-use App\User\Application\Dto\RegisterUserDto;
 use App\User\Domain\ValueObject\Email;
-use App\Common\Domain\UserId;
-use App\Models\User;
+use Common\Domain\ValueObject\UserId;
 use Mockery;
+use Tests\TestCase;
 
 class RegisterUserDtoFactoryTest extends TestCase
 {

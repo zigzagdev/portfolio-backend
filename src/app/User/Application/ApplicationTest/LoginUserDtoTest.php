@@ -2,14 +2,14 @@
 
 namespace App\User\Application\ApplicationTest;
 
-use App\User\Domain\Factory\UserEntityFactory;
-use Tests\TestCase;
-use App\Common\Domain\UserId;
-use Mockery;
-use App\User\Domain\Entity\UserEntity;
 use App\User\Application\Dto\LoginUserDto;
+use App\User\Domain\Entity\UserEntity;
+use App\User\Domain\Factory\UserEntityFactory;
 use App\User\Domain\ValueObject\AuthToken;
 use App\User\Domain\ValueObject\Email;
+use Common\Domain\ValueObject\UserId;
+use Mockery;
+use Tests\TestCase;
 
 class LoginUserDtoTest extends TestCase
 {

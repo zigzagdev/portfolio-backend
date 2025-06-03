@@ -2,22 +2,22 @@
 
 namespace User\Infrastructure\InfrastructureTest;
 
-use App\Common\Domain\UserId;
 use App\Models\User;
+use App\User\Domain\Entity\UserEntity;
+use App\User\Domain\Factory\UserEntityFactory;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
-use App\User\Infrastructure\Repository\UserRepository;
-use Illuminate\Support\Facades\DB;
-use Tests\TestCase;
-use App\User\Infrastructure\Service\GenerateTokenService;
-use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\ValueObject\AuthToken;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
-use App\User\Domain\Factory\UserEntityFactory;
-use Mockery;
+use App\User\Infrastructure\Repository\UserRepository;
+use App\User\Infrastructure\Service\GenerateTokenService;
+use Common\Domain\ValueObject\UserId;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Illuminate\Support\Facades\DB;
+use Mockery;
+use Tests\TestCase;
 
 class GenerateTokenServiceTest extends TestCase
 {

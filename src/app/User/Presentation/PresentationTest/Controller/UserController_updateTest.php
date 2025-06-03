@@ -2,16 +2,16 @@
 
 namespace App\User\Presentation\PresentationTest\Controller;
 
-use App\Common\Domain\UserId;
 use App\User\Application\Dto\UpdateUserDto;
 use App\User\Application\UseCase\UpdateUseCase;
 use App\User\Application\UseCommand\UpdateUserCommand;
 use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\Controller\UserController;
+use Common\Domain\ValueObject\UserId;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Tests\TestCase;
 use Mockery;
+use Tests\TestCase;
 
 class UserController_updateTest extends TestCase
 {

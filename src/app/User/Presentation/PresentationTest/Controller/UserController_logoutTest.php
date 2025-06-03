@@ -2,19 +2,19 @@
 
 namespace App\User\Presentation\PresentationTest\Controller;
 
+use App\Models\User;
 use App\User\Application\UseCase\LogoutUserUseCase;
+use App\User\Domain\Entity\UserEntity;
+use App\User\Domain\Factory\UserEntityFactory;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\Service\AuthServiceInterface;
+use App\User\Presentation\Controller\UserController;
+use Common\Domain\ValueObject\UserId;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Tests\TestCase;
-use App\User\Presentation\Controller\UserController;
 use Mockery;
-use App\User\Domain\Entity\UserEntity;
-use App\User\Domain\Factory\UserEntityFactory;
-use App\Common\Domain\UserId;
-use App\Models\User;
+use Tests\TestCase;
 
 class UserController_logoutTest extends TestCase
 {

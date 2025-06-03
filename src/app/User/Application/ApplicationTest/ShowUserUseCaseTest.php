@@ -3,15 +3,15 @@
 namespace App\User\Application\ApplicationTest;
 
 use App\Models\User;
-use Tests\TestCase;
+use App\User\Application\Dto\ShowUserDto;
 use App\User\Application\UseCase\ShowUserUseCase;
+use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
-use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\ValueObject\Email;
-use App\User\Application\Dto\ShowUserDto;
+use Common\Domain\ValueObject\UserId;
 use Mockery;
-use App\Common\Domain\UserId;
+use Tests\TestCase;
 
 class ShowUserUseCaseTest extends TestCase
 {

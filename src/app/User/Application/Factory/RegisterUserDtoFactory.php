@@ -2,10 +2,10 @@
 
 namespace App\User\Application\Factory;
 
+use App\User\Application\Dto\RegisterUserDto;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\ValueObject\Email;
-use App\Common\Domain\UserId;
-use App\User\Application\Dto\RegisterUserDto;
+use Common\Domain\ValueObject\UserId;
 
 class RegisterUserDtoFactory
 {
