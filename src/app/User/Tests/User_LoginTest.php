@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
-class User_loginTest extends TestCase
+class User_LoginTest extends TestCase
 {
     protected function setUp(): void
     {

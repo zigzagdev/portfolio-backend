@@ -14,8 +14,13 @@ use App\User\Application\UseCase\RegisterUserUsecase;
 use App\User\Application\UseCase\UpdateUseCase;
 use App\User\Application\UseCommand\UpdateUserCommand;
 use App\User\Presentation\ViewModel\UpdateUserViewModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\User\Application\UseCase\LogoutUserUseCase;
 use Exception;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -120,6 +125,45 @@ class UserController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage(),
             ], 500);
+        }
+    }
+
+    public function logout(
+        Request $request,
+        LogoutUserUseCase $useCase
+    ): JsonResponse
+    {
+        try {
+            $token = $request->bearerToken();
+
+            if (!$token) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Token not provided',
+                ], 401);
+            }
+
+            // JWTの検証とuser_idの抽出（ここがControllerの責務）
+            $decoded = JWT::decode($token, new Key(config('jwt.secret'), 'HS256'));
+
+            if (empty($decoded->user_id)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid token payload',
+                ], 401);
+            }
+
+            $useCase->handle($decoded->user_id);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User logged out successfully',
+            ], 200);
+        } catch (Throwable $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid or expired token',
+            ], 401);
         }
     }
 }
