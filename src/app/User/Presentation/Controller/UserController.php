@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User\Application\UseCase\LogoutUserUseCase;
 use Exception;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -126,20 +129,41 @@ class UserController extends Controller
     }
 
     public function logout(
+        Request $request,
         LogoutUserUseCase $useCase
-    ): void
+    ): JsonResponse
     {
         try {
-            $authUser = Auth::user();
+            $token = $request->bearerToken();
 
-            if (!$authUser) {
-                throw new Exception('User not authenticated');
+            if (!$token) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Token not provided',
+                ], 401);
             }
 
-            $useCase->handle($authUser->id);
+            // JWTの検証とuser_idの抽出（ここがControllerの責務）
+            $decoded = JWT::decode($token, new Key(config('jwt.secret'), 'HS256'));
 
-        } catch (Exception $e) {
-            throw new Exception('Logout failed: ' . $e->getMessage());
+            if (empty($decoded->user_id)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid token payload',
+                ], 401);
+            }
+
+            $useCase->handle($decoded->user_id);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User logged out successfully',
+            ], 200);
+        } catch (Throwable $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid or expired token',
+            ], 401);
         }
     }
 }
