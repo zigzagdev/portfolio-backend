@@ -2,15 +2,15 @@
 
 namespace App\User\Infrastructure\Repository;
 
-use App\Common\Domain\UserId;
 use App\Models\User;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
+use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Email;
-use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
-use LogicException;
+use Common\Domain\ValueObjet\UserId;
 use Exception;
+use LogicException;
 
 class UserRepository implements UserRepositoryInterface
 {

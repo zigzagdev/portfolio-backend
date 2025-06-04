@@ -2,19 +2,18 @@
 
 namespace App\User\Infrastructure\InfrastructureTest;
 
-use App\User\Domain\Factory\UserEntityFactory;
-use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
-use Tests\TestCase;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\User\Domain\Entity\UserEntity;
+use App\User\Domain\Factory\UserEntityFactory;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
-use App\User\Infrastructure\Repository\UserRepository;
-use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
-use App\Common\Domain\UserId;
+use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
+use App\User\Infrastructure\Repository\UserRepository;
+use Common\Domain\ValueObjet\UserId;
+use Illuminate\Support\Facades\DB;
 use Mockery;
+use Tests\TestCase;
 
 class UserRepository_findByIdTest extends TestCase
 {

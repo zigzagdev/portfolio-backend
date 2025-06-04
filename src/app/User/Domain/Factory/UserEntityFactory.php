@@ -3,10 +3,10 @@
 namespace App\User\Domain\Factory;
 
 use App\User\Domain\Entity\UserEntity;
+use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
-use App\Common\Domain\UserId;
-use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
+use Common\Domain\ValueObjet\UserId;
 
 class UserEntityFactory
 {
