@@ -3,13 +3,13 @@
 namespace App\User\Presentation\PresentationTest;
 
 use App\User\Application\Dto\RegisterUserDto;
-use Tests\TestCase;
-use App\User\Presentation\ViewModel\Factory\RegisterUserViewModelFactory;
-use Mockery;
 use App\User\Application\Factory\RegisterUserDtoFactory;
-use App\User\Presentation\ViewModel\RegisterUserViewModel;
-use App\Common\Domain\UserId;
 use App\User\Domain\ValueObject\Email;
+use App\User\Presentation\ViewModel\Factory\RegisterUserViewModelFactory;
+use App\User\Presentation\ViewModel\RegisterUserViewModel;
+use Common\Domain\ValueObjet\UserId;
+use Mockery;
+use Tests\TestCase;
 
 class RegisterUserViewModelFactoryTest extends TestCase
 {

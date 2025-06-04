@@ -6,7 +6,7 @@ use App\Models\User;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
-use App\Common\Domain\UserId;
+use Common\Domain\ValueObjet\UserId;
 
 class UserFromModelEntityFactory
 {

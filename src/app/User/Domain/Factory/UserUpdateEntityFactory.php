@@ -4,8 +4,8 @@ namespace App\User\Domain\Factory;
 
 use App\User\Application\UseCommand\UpdateUserCommand;
 use App\User\Domain\Entity\UserEntity;
-use App\Common\Domain\UserId;
 use App\User\Domain\ValueObject\Email;
+use Common\Domain\ValueObjet\UserId;
 
 class UserUpdateEntityFactory
 {
