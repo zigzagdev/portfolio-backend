@@ -2,16 +2,16 @@
 
 namespace App\User\Infrastructure\InfrastructureTest;
 
-use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
-use App\User\Infrastructure\Repository\UserRepository;
-use Tests\TestCase;
-use Mockery;
-use App\User\Domain\Entity\UserEntity;
-use App\User\Domain\ValueObject\Email;
-use App\Common\Domain\UserId;
-use App\User\Domain\Factory\UserUpdateEntityFactory;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\User\Domain\Entity\UserEntity;
+use App\User\Domain\Factory\UserUpdateEntityFactory;
+use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
+use App\User\Domain\ValueObject\Email;
+use App\User\Infrastructure\Repository\UserRepository;
+use Common\Domain\ValueObjet\UserId;
+use Illuminate\Support\Facades\DB;
+use Mockery;
+use Tests\TestCase;
 
 class UserRepository_updateTest extends TestCase
 {

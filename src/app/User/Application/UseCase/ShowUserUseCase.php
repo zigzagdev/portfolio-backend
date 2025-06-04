@@ -2,12 +2,9 @@
 
 namespace App\User\Application\UseCase;
 
-use App\Common\Domain\UserId;
-use App\Models\User;
-use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Application\Dto\ShowUserDto;
-use App\User\Domain\Factory\UserFromModelEntityFactory;
-use Exception;
+use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
+use Common\Domain\ValueObjet\UserId;
 
 class ShowUserUseCase
 {

@@ -2,12 +2,12 @@
 
 namespace App\User\Presentation\PresentationTest;
 
-use App\Common\Domain\UserId;
 use App\User\Application\Dto\UpdateUserDto;
 use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\ViewModel\UpdateUserViewModel;
-use Tests\TestCase;
+use Common\Domain\ValueObjet\UserId;
 use Mockery;
+use Tests\TestCase;
 
 class UpdateUserViewModelTest extends TestCase
 {
