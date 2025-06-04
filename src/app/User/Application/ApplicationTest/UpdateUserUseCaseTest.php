@@ -2,16 +2,16 @@
 
 namespace App\User\Application\UseCase;
 
-use App\User\Application\Dto\UpdateUserDto;
-use App\User\Application\UseCommand\UpdateUserCommand;
-use App\User\Domain\Entity\UserEntity;
+use App\Common\Domain\UserId;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
 use App\User\Domain\Factory\UserUpdateEntityFactory;
-use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Email;
-use Common\Domain\ValueObjet\UserId;
-use Mockery;
 use Tests\TestCase;
+use Mockery;
+use App\User\Application\UseCommand\UpdateUserCommand;
+use App\User\Application\Dto\UpdateUserDto;
+use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
+use App\User\Domain\Entity\UserEntity;
 
 class UpdateUserUseCaseTest extends TestCase
 {

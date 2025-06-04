@@ -2,9 +2,9 @@
 
 namespace App\User\Domain\Entity;
 
+use App\Common\Domain\UserId;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
-use Common\Domain\ValueObjet\UserId;
 use LogicException;
 
 class UserEntity

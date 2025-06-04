@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Common\Domain\ValueObject;
+namespace App\Common\Domain;
 
 use InvalidArgumentException;
 
-class PostId
+class UserId
 {
     private ?int $value;
 
     public function __construct(?int $value)
     {
         if (!is_null($value) && $value <= 0) {
-            throw new InvalidArgumentException('Post Id must be a positive integer.');
+            throw new InvalidArgumentException('User Id must be a positive integer.');
         }
 
         $this->value = $value;

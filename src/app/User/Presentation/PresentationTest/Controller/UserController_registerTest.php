@@ -2,15 +2,15 @@
 
 namespace App\User\Presentation\PresentationTest\Controller;
 
-use App\User\Application\Dto\RegisterUserDto;
+use App\Common\Domain\UserId;
 use App\User\Application\UseCase\RegisterUserUsecase;
 use App\User\Application\UseCommand\RegisterUserCommand;
-use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\Controller\UserController;
-use Common\Domain\ValueObjet\UserId;
+use App\User\Application\Dto\RegisterUserDto;
 use Illuminate\Http\Request;
-use Mockery;
+use App\User\Domain\ValueObject\Email;
 use Tests\TestCase;
+use Mockery;
 
 class UserController_registerTest extends TestCase
 {

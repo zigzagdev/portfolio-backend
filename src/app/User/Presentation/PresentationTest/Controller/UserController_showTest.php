@@ -4,13 +4,13 @@ namespace App\User\Presentation\PresentationTest\Controller;
 
 use App\User\Application\Dto\ShowUserDto;
 use App\User\Application\UseCase\ShowUserUseCase;
-use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\Controller\UserController;
 use App\User\Presentation\ViewModel\ShowUserViewModel;
-use Common\Domain\ValueObjet\UserId;
 use Illuminate\Http\JsonResponse;
-use Mockery;
 use Tests\TestCase;
+use Mockery;
+use App\Common\Domain\UserId;
+use App\User\Domain\ValueObject\Email;
 
 class UserController_showTest extends TestCase
 {

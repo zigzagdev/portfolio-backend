@@ -2,13 +2,13 @@
 
 namespace App\User\Application\ApplicationTest;
 
+use Tests\TestCase;
 use App\User\Application\Dto\UpdateUserDto;
 use App\User\Domain\Entity\UserEntity;
-use App\User\Domain\Factory\UserUpdateEntityFactory;
 use App\User\Domain\ValueObject\Email;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\UserId;
 use Mockery;
-use Tests\TestCase;
+use App\User\Domain\Factory\UserUpdateEntityFactory;
 
 class UpdateUserDtoTest extends TestCase
 {

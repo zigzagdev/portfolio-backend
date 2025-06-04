@@ -2,9 +2,9 @@
 
 namespace App\User\Domain\RepositoryInterface;
 
+use App\Common\Domain\UserId;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\ValueObject\Email;
-use Common\Domain\ValueObjet\UserId;
 
 interface UserRepositoryInterface
 {

@@ -2,19 +2,19 @@
 
 namespace App\User\Application\ApplicationTest;
 
-use App\User\Application\Dto\RegisterUserDto;
-use App\User\Application\Factory\RegisterUserCommandFactory;
-use App\User\Application\Factory\RegisterUserDtoFactory;
 use App\User\Application\UseCase\RegisterUserUsecase;
-use App\User\Application\UseCommand\RegisterUserCommand;
-use App\User\Domain\Entity\UserEntity;
-use App\User\Domain\Factory\UserEntityFactory;
-use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
-use App\User\Domain\ValueObject\Email;
 use App\User\Infrastructure\Repository\UserRepository;
-use Common\Domain\ValueObjet\UserId;
-use Mockery;
+use App\User\Domain\Factory\UserEntityFactory;
+use App\User\Application\Dto\RegisterUserDto;
+use App\User\Application\Factory\RegisterUserDtoFactory;
+use App\User\Application\UseCommand\RegisterUserCommand;
+use App\User\Application\Factory\RegisterUserCommandFactory;
+use App\User\Domain\Entity\UserEntity;
 use Tests\TestCase;
+use Mockery;
+use App\Common\Domain\UserId;
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 
 class RegisterUserUseCaseTest extends TestCase
 {

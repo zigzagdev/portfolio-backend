@@ -2,13 +2,13 @@
 
 namespace App\User\Application\ApplicationTest;
 
+use App\Common\Domain\UserId;
 use App\User\Application\Dto\ShowUserDto;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
-use App\User\Domain\ValueObject\Email;
-use Common\Domain\ValueObjet\UserId;
-use Mockery;
 use Tests\TestCase;
+use App\User\Domain\ValueObject\Email;
+use Mockery;
 
 class ShowUserDtoTest extends TestCase
 {

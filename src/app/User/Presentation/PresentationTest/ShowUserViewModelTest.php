@@ -3,11 +3,11 @@
 namespace App\User\Presentation\PresentationTest;
 
 use App\User\Application\Dto\ShowUserDto;
-use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\ViewModel\ShowUserViewModel;
-use Common\Domain\ValueObjet\UserId;
-use Mockery;
 use Tests\TestCase;
+use Mockery;
+use App\User\Domain\ValueObject\Email;
+use App\Common\Domain\UserId;
 
 class ShowUserViewModelTest extends TestCase
 {

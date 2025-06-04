@@ -3,10 +3,12 @@
 namespace App\User\Domain\DomainTest;
 
 use App\User\Application\UseCommand\UpdateUserCommand;
-use App\User\Domain\Entity\UserEntity;
-use App\User\Domain\Factory\UserUpdateEntityFactory;
 use Mockery;
 use Tests\TestCase;
+use App\User\Domain\Entity\UserEntity;
+use App\Common\Domain\UserId;
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\Factory\UserUpdateEntityFactory;
 
 class UserUpdateEntityFactoryTest extends TestCase
 {
