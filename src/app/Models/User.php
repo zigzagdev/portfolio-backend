@@ -29,8 +29,6 @@ class User extends Authenticatable
         'profile_image',
     ];
 
-    protected $connected = 'mysql';
-
     /**
      * The database connection that should be used by the model.
      *
