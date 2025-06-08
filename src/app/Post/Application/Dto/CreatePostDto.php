@@ -43,4 +43,9 @@ class CreatePostDto
             'visibility' => $this->getVisibility()->getValue(),
         ];
     }
+
+    public static function build(PostEntity $entity): self
+    {
+        return new self($entity);
+    }
 }
