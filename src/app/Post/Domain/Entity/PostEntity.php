@@ -20,11 +20,15 @@ class PostEntity
     public static function build(array $request): self
     {
         return new self(
-            id: isset($request['id']) ? new PostId($request['id']) : null,
-            userId: new UserId($request['userId']),
+            id: isset($request['id'])
+                ? ($request['id'] instanceof PostId ? $request['id'] : new PostId($request['id']))
+                : null,
+            userId: $request['userId'] instanceof UserId ? $request['userId'] : new UserId($request['userId']),
             content: $request['content'],
             mediaPath: $request['mediaPath'] ?? null,
-            visibility: new Postvisibility(PostVisibilityEnum::fromString($request['visibility']))
+            visibility: $request['visibility'] instanceof PostVisibility
+                ? $request['visibility']
+                : new PostVisibility(PostVisibilityEnum::fromString($request['visibility']))
         );
     }
 
