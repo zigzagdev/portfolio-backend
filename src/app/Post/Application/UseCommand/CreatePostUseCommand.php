@@ -45,4 +45,14 @@ class CreatePostUseCommand
             }
         }
     }
+
+    public function toArray(): array
+    {
+        return [
+            'userId' => $this->userId,
+            'content' => $this->content,
+            'mediaPath' => $this->mediaPath,
+            'visibility' => $this->visibility,
+        ];
+    }
 }
