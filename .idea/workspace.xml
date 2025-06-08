@@ -9,6 +9,7 @@
       <change afterPath="$PROJECT_DIR$/src/app/Post/Presentation/PresentationTest/CreatePostViewModelTest.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/app/Post/Presentation/ViewModel/CreatePostViewModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Post/Application/Dto/CreatePostDto.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Post/Application/Dto/CreatePostDto.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +165,7 @@
     "PHPUnit.メイン.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/presentation-create-post-viewmodel",
+    "git-widget-placeholder": "feature/create-post-presentation-controller",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
