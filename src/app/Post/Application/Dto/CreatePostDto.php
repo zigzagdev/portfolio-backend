@@ -6,7 +6,6 @@ use App\Common\Domain\ValueObject\PostId;
 use App\Common\Domain\ValueObject\UserId;
 use App\Post\Domain\Entity\PostEntity;
 use App\Post\Domain\ValueObject\PostVisibility;
-use App\Common\Domain\Enum\PostVisibility as PostVisibilityEnum;
 
 class CreatePostDto
 {
@@ -50,8 +49,10 @@ class CreatePostDto
         ];
     }
 
-    public static function build(PostEntity $entity): self
+    public static function build(PostEntity $entity): CreatePostDto
     {
-        return new self($entity);
+        return new CreatePostDto(
+            entity: $entity
+        );
     }
 }
