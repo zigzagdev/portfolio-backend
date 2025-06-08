@@ -17,4 +17,12 @@ enum PostVisibility: string
             default => throw new InvalidArgumentException("Invalid PostVisibility: {$value}"),
         };
     }
+
+    public function toInt(): int
+    {
+        return match ($this) {
+            self::PUBLIC => 1,
+            self::PRIVATE => 2,
+        };
+    }
 }

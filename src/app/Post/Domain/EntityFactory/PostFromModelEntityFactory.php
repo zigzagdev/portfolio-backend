@@ -14,12 +14,11 @@ class PostFromModelEntityFactory
     {
         return PostEntity::build([
             'id' => new PostId($request['id']),
-            'userId' => new UserId($request['userId']),
+            'userId' => new UserId($request['user_id']),
             'content' => $request['content'],
-            'mediaPath' => $request['mediaPath'] ?? null,
+            'mediaPath' => $request['media_path'] ?? null,
             'visibility' => new PostVisibility(
-                PostVisibilityEnum::fromString($request['visibility'])
-            ),
+                $request['visibility']),
         ]);
     }
 }
