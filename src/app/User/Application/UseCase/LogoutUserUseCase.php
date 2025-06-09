@@ -4,7 +4,7 @@ namespace App\User\Application\UseCase;
 
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\Service\AuthServiceInterface;
-use Common\Domain\ValueObject\UserId;
+use Common\Domain\ValueObjet\UserId;
 
 class LogoutUserUseCase
 {

@@ -7,7 +7,7 @@ use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserEntityFactory;
 use App\User\Domain\ValueObject\AuthToken;
 use App\User\Domain\ValueObject\Email;
-use Common\Domain\ValueObject\UserId;
+use Common\Domain\ValueObjet\UserId;
 use Mockery;
 use Tests\TestCase;
 

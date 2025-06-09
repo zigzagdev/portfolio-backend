@@ -12,7 +12,7 @@ use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
 use App\User\Infrastructure\Repository\UserRepository;
 use App\User\Infrastructure\Service\GenerateTokenService;
-use Common\Domain\ValueObject\UserId;
+use Common\Domain\ValueObjet\UserId;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Support\Facades\DB;

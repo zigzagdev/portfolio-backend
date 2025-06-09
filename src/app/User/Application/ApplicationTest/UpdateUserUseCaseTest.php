@@ -9,7 +9,7 @@ use App\User\Domain\Factory\UserFromModelEntityFactory;
 use App\User\Domain\Factory\UserUpdateEntityFactory;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Email;
-use Common\Domain\ValueObject\UserId;
+use Common\Domain\ValueObjet\UserId;
 use Mockery;
 use Tests\TestCase;
 

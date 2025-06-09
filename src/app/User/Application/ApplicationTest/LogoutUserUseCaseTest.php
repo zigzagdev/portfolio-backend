@@ -8,7 +8,7 @@ use App\User\Domain\Factory\UserEntityFactory;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\Service\AuthServiceInterface;
-use Common\Domain\ValueObject\UserId;
+use Common\Domain\ValueObjet\UserId;
 use Mockery;
 use Tests\TestCase;
 

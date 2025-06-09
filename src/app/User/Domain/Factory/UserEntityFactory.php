@@ -6,7 +6,7 @@ use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
-use Common\Domain\ValueObject\UserId;
+use Common\Domain\ValueObjet\UserId;
 
 class UserEntityFactory
 {

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Post\Domain\RepositoryInterface\PostRepositoryInterface;
+use App\Post\Infrastructure\Repository\PostRepository;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Infrastructure\Repository\UserRepository;
@@ -42,6 +44,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             PasswordHasherInterface::class,
             BcryptPasswordHasher::class
+        );
+
+        $this->app->bind(
+            PostRepositoryInterface::class,
+            PostRepository::class
         );
     }
 

@@ -5,7 +5,7 @@ namespace App\User\Domain\Factory;
 use App\User\Application\UseCommand\UpdateUserCommand;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\ValueObject\Email;
-use Common\Domain\ValueObject\UserId;
+use Common\Domain\ValueObjet\UserId;
 
 class UserUpdateEntityFactory
 {

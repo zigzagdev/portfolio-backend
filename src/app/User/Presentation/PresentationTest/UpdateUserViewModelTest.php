@@ -5,7 +5,7 @@ namespace App\User\Presentation\PresentationTest;
 use App\User\Application\Dto\UpdateUserDto;
 use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\ViewModel\UpdateUserViewModel;
-use Common\Domain\ValueObject\UserId;
+use Common\Domain\ValueObjet\UserId;
 use Mockery;
 use Tests\TestCase;
 

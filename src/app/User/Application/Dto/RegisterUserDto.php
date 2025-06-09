@@ -3,7 +3,7 @@
 namespace App\User\Application\Dto;
 
 use App\User\Domain\ValueObject\Email;
-use Common\Domain\ValueObject\UserId;
+use Common\Domain\ValueObjet\UserId;
 
 class RegisterUserDto
 {
