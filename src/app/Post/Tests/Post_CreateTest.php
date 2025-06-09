@@ -61,7 +61,7 @@ class Post_CreateTest extends TestCase
             "api/users/{$user_id}/posts",
             $postRequest
         );
-dd($response->getContent());
+
         $this->assertEquals(201, $response->getStatusCode());
     }
 }
