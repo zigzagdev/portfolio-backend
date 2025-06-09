@@ -7,7 +7,7 @@ use App\User\Application\UseCase\RegisterUserUsecase;
 use App\User\Application\UseCommand\RegisterUserCommand;
 use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\Controller\UserController;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\ValueObject\UserId;
 use Illuminate\Http\Request;
 use Mockery;
 use Tests\TestCase;

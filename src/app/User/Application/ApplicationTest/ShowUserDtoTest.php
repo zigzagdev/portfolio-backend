@@ -6,7 +6,7 @@ use App\User\Application\Dto\ShowUserDto;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
 use App\User\Domain\ValueObject\Email;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\ValueObject\UserId;
 use Mockery;
 use Tests\TestCase;
 

@@ -7,7 +7,7 @@ use App\User\Application\UseCase\UpdateUseCase;
 use App\User\Application\UseCommand\UpdateUserCommand;
 use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\Controller\UserController;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\ValueObject\UserId;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Mockery;

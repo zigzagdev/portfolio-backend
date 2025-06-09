@@ -4,7 +4,7 @@ namespace App\User\Domain\Entity;
 
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\ValueObject\UserId;
 use LogicException;
 
 class UserEntity
