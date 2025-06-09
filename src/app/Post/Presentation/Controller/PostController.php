@@ -15,7 +15,7 @@ class PostController extends Controller
 {
     public function create(
         Request $request,
-        int $userId,
+        int $user_id,
         CreateUseCase $useCase
     ): JsonResponse{
         DB::connection('mysql')->beginTransaction();
@@ -24,7 +24,7 @@ class PostController extends Controller
             $command = CreatePostUseCommand::build(
                 array_merge(
                     $request->toArray(),
-                    ['userId' => $userId]
+                    ['user_id' => $user_id]
                 )
             );
 
