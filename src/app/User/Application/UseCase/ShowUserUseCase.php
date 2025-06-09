@@ -4,7 +4,7 @@ namespace App\User\Application\UseCase;
 
 use App\User\Application\Dto\ShowUserDto;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\ValueObject\UserId;
 
 class ShowUserUseCase
 {

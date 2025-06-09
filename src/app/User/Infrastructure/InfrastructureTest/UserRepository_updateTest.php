@@ -8,7 +8,7 @@ use App\User\Domain\Factory\UserUpdateEntityFactory;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Infrastructure\Repository\UserRepository;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\ValueObject\UserId;
 use Illuminate\Support\Facades\DB;
 use Mockery;
 use Tests\TestCase;

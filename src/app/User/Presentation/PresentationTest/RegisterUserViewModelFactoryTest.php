@@ -7,7 +7,7 @@ use App\User\Application\Factory\RegisterUserDtoFactory;
 use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\ViewModel\Factory\RegisterUserViewModelFactory;
 use App\User\Presentation\ViewModel\RegisterUserViewModel;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\ValueObject\UserId;
 use Mockery;
 use Tests\TestCase;
 

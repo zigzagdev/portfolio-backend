@@ -11,7 +11,7 @@ use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
 use App\User\Infrastructure\Repository\UserRepository;
 use App\User\Infrastructure\Service\JwtAuthService;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\ValueObject\UserId;
 use Illuminate\Support\Facades\DB;
 use Mockery;
 use Tests\TestCase;

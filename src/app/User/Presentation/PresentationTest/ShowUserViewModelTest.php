@@ -5,7 +5,7 @@ namespace App\User\Presentation\PresentationTest;
 use App\User\Application\Dto\ShowUserDto;
 use App\User\Domain\ValueObject\Email;
 use App\User\Presentation\ViewModel\ShowUserViewModel;
-use Common\Domain\ValueObjet\UserId;
+use App\Common\Domain\ValueObject\UserId;
 use Mockery;
 use Tests\TestCase;
 
