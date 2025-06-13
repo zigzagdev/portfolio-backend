@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6952a861-17ec-40ad-b866-c564752c14a8" name="変更" comment="fix: test-environment-fix">
-      <change afterPath="$PROJECT_DIR$/src/app/Common/Presentation/PresentationTest/PaginationViewModelTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Common/Presentation/ViewModel/Pagination.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Common/Presentation/ViewModelFactory/PaginationFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Post/Infrastructure/InfrastructureTest/GetAllUserPostQueryServiceTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Post/Infrastructure/QueryService/GetAllUserPostQueryService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Post/Domain/EntityFactory/PostFromModelEntityFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Post/Domain/EntityFactory/PostFromModelEntityFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Post/Infrastructure/InfrastructureTest/PostRepositoryTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Post/Infrastructure/InfrastructureTest/PostRepository_addTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +165,7 @@
     "PHPUnit.メイン.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/show-post-index-pagination-viewmodel",
+    "git-widget-placeholder": "feature/show-post-index-infrastructure",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
