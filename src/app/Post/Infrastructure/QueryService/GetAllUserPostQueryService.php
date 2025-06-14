@@ -4,7 +4,6 @@ namespace App\Post\Infrastructure\QueryService;
 
 use App\Models\Post;
 use App\Post\Application\QueryServiceInterface\GetAllUserPostQueryServiceInterface;
-use App\Post\Domain\Entity\PostEntityCollection;
 use App\Post\Domain\EntityFactory\PostFromModelEntityFactory;
 use App\Common\Application\Dto\Pagination as PaginationDto;
 

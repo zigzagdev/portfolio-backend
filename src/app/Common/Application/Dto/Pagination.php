@@ -9,8 +9,8 @@ class Pagination
     public function __construct(
         private array $data,
         private ?int $currentPage = null,
-        private ?string $from = null,
-        private ?string $to = null,
+        private ?int $from = null,
+        private ?int $to = null,
         private ?int $perPage = null,
         private ?string $path = null,
         private ?int $lastPage = null,
