@@ -60,6 +60,12 @@ class PostController_getAllUserPostTest extends TestCase
             ->shouldReceive('getPerPage')
             ->andReturn($this->perPage);
 
+        $mock
+            ->shouldReceive('getData')
+            ->andReturn([
+                $this->mockViewModel(),
+            ]);
+
         return $mock;
     }
 
