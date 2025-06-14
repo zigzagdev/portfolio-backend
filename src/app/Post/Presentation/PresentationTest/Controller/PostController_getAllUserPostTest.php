@@ -85,44 +85,6 @@ class PostController_getAllUserPostTest extends TestCase
         return $mock;
     }
 
-    private function mockPaginationViewModel(): PaginationViewModel
-    {
-        $factory = Mockery::mock(
-            'alias:' . PaginationFactory::class
-        );
-
-        $viewModel = Mockery::mock(
-            PaginationViewModel::class
-        );
-
-        $factory
-            ->shouldReceive('build')
-            ->with(
-                Mockery::type(PaginationDto::class),
-                Mockery::type('array')
-            )
-            ->andReturn($viewModel);
-
-        $viewModel
-            ->shouldReceive('toArray')
-            ->andReturn([
-                'currentPage' => $this->currentPage,
-                'perPage' => $this->perPage,
-                'total' => 100,
-                'lastPage' => 10,
-                'from' => 1,
-                'to' => 10,
-                'path' => '/api/posts',
-                'firstPageUrl' => '/api/posts?page=1',
-                'lastPageUrl' => '/api/posts?page=10',
-                'nextPageUrl' => '/api/posts?page=2',
-                'prevPageUrl' => null,
-                'links' => [],
-            ]);
-
-        return $viewModel;
-    }
-
     private function mockRequest(): Request
     {
         $mock = Mockery::mock(Request::class);
