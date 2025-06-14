@@ -2,6 +2,7 @@
 
 namespace App\Post\Infrastructure\InfrastructureTest;
 
+use App\Common\Application\Dto\Pagination;
 use App\Post\Domain\Entity\PostEntity;
 use App\Post\Infrastructure\QueryService\GetAllUserPostQueryService;
 use Illuminate\Support\Facades\DB;
@@ -16,13 +17,18 @@ use App\Common\Domain\Enum\PostVisibility as PostVisibilityEnum;
 use App\Common\Domain\ValueObject\UserId;
 use App\Common\Domain\ValueObject\PostId;
 use App\Post\Domain\ValueObject\Postvisibility;
+use Illuminate\Support\Carbon;
 
 class GetAllUserPostQueryServiceTest extends TestCase
 {
     private $user;
     private $queryService;
+    private $perPage = 15;
+    private $currentPage = 1;
+
 
     private $post;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -61,141 +67,80 @@ class GetAllUserPostQueryServiceTest extends TestCase
 
     private function createDummyPosts(): void
     {
-        Post::insert([
-            [
+        $posts = [];
+        $baseTime = Carbon::now();
+
+        for ($i = 1; $i <= 50; $i++) {
+            $time = $baseTime->copy()->addSeconds($i);
+
+            $posts[] = [
                 'user_id' => $this->user->id,
-                'content' => 'ダミーポスト1',
-                'media_path' => 'https://example.com/image1.jpg',
-                'visibility' => 0,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'user_id' => $this->user->id,
-                'content' => 'ダミーポスト2',
-                'media_path' => null,
-                'visibility' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+                'content' => "ダミーポスト{$i}",
+                'media_path' => $i % 2 === 0 ? null : "https://example.com/image{$i}.jpg",
+                'visibility' => $i % 2 === 0 ? 1 : 0,
+                'created_at' => $time,
+                'updated_at' => $time,
+            ];
+        }
+
+        Post::insert($posts);
     }
 
-    private function mockEntityCollection(): PostEntityCollection
+    public function test_check_pagination_type(): void
     {
-        $entityCollection = Mockery::mock(PostEntityCollection::class);
-
-        $entityCollection
-            ->shouldReceive('getAll')
-            ->andReturn($this->arrayTestData());
-
-        $entityCollection
-            ->shouldReceive('build')
-            ->andReturnUsing(function ($data) {
-                return Mockery::mock(PostFromModelEntityFactory::class)
-                    ->shouldReceive('build')
-                    ->with($data)
-                    ->andReturn(Mockery::mock(PostFromModelEntityFactory::class));
-            });
-
-        return $entityCollection;
-    }
-
-    private function mockEntity(): PostEntity
-    {
-        $entity = Mockery::mock(PostEntity::class);
-
-        $entity
-            ->shouldReceive('getId')
-            ->andReturn($this->arrayTestData()[0]['id']);
-
-        $entity
-            ->shouldReceive('getMediaPath')
-            ->andReturn($this->arrayTestData()[0]['media_path']);
-
-        $entity
-            ->shouldReceive('getContent')
-            ->andReturn($this->arrayTestData()[0]['content']);
-
-        $entity
-            ->shouldReceive('getUserId')
-            ->andReturn($this->arrayTestData()[0]['user_id']);
-
-        $entity
-            ->shouldReceive('getPostVisibility')
-            ->andReturn(PostVisibilityEnum::from($this->arrayTestData()[0]['visibility']));
-
-        return $entity;
-    }
-
-    private function arrayTestData(): array
-    {
-        return [
-            [
-                'id' => 1,
-                'user_id' => $this->user->id,
-                'content' => 'Test post content',
-                'media_path' => 'https://example.com/media/test.jpg',
-                'visibility' => PostVisibilityEnum::PUBLIC->value
-            ],
-            [
-                'id' => 2,
-                'user_id' => $this->user->id,
-                'content' => 'Another test post content',
-                'media_path' => null,
-                'visibility' => PostVisibilityEnum::PRIVATE->value
-            ]
-        ];
-    }
-
-    private function mockPostFromEntity(): PostEntity
-    {
-        $factory = Mockery::mock(
-            'alias' . PostFromModelEntityFactory::class
+        $result = $this->queryService->getAllUserPosts(
+            $this->user->id,
+            $this->perPage,
+            $this->currentPage
         );
 
-        $entity = Mockery::mock(PostEntity::class);
-
-        $factory
-            ->shouldReceive('buildFromModel')
-            ->andReturn($entity);
-
-        $entity
-            ->shouldReceive('getId')
-            ->andReturn(new PostId($this->arrayTestData()[0]['id']));
-
-        $entity
-            ->shouldReceive('getUserId')
-            ->andReturn(new UserId($this->arrayTestData()[0]['user_id']));
-
-        $entity
-            ->shouldReceive('getContent')
-            ->andReturn($this->arrayTestData()[0]['content']);
-
-        $entity
-            ->shouldReceive('getMediaPath')
-            ->andReturn($this->arrayTestData()[0]['media_path']);
-
-        $entity
-            ->shouldReceive('getPostVisibility')
-            ->andReturn(new Postvisibility(
-                PostVisibilityEnum::from((int) $this->arrayTestData()[0]['visibility'])
-            ));
-
-        return $entity;
+        $this->assertInstanceOf(
+            Pagination::class,
+            $result
+        );
     }
 
-    public function test_get_all_post_check_type(): void
+    public function test_check_pagination_data_value(): void
     {
-        $result = $this->queryService->getAllUserPosts($this->user->id);
+        $result = $this->queryService->getAllUserPosts(
+            $this->user->id,
+            $this->perPage,
+            $this->currentPage
+        );
 
-        $this->assertInstanceOf(PostEntityCollection::class, $result);
+        foreach ($result->getData() as $post) {
+            $this->assertInstanceOf(
+                PostEntity::class,
+                $post
+            );
+        }
     }
 
-    public function test_get_all_post_check_value(): void
+    public function test_check_pagination_current_page_value(): void
     {
-        $result = $this->queryService->getAllUserPosts($this->user->id);
+        $result = $this->queryService->getAllUserPosts(
+            $this->user->id,
+            $this->perPage,
+            $this->currentPage = 30
+        );
 
-        $this->assertCount(2, $result->getPosts());
+        $this->assertEquals(
+            $this->currentPage,
+            $result->getCurrentPage()
+        );
+    }
+
+    public function test_check_pagination_per_page_value(): void
+    {
+        $result = $this->queryService->getAllUserPosts(
+            $this->user->id,
+            $this->perPage = 20,
+            $this->currentPage
+        );
+
+        $this->assertEquals(
+            $this->perPage,
+            $result->getPerPage()
+        );
     }
 }

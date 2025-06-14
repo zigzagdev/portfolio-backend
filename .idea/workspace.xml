@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6952a861-17ec-40ad-b866-c564752c14a8" name="変更" comment="fix: test-environment-fix">
-      <change afterPath="$PROJECT_DIR$/src/app/Post/Infrastructure/InfrastructureTest/GetAllUserPostQueryServiceTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Post/Infrastructure/QueryService/GetAllUserPostQueryService.php" afterDir="false" />
+    <list default="true" id="6952a861-17ec-40ad-b866-c564752c14a8" name="変更" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/Post/Application/ApplicationTest/GetAllUserPostDtoCollectionTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Post/Application/ApplicationTest/GetAllUserPostDtoTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Post/Application/Dto/GetAllUserPostDto.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Post/Application/Dto/GetAllUserPostDtoCollection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Post/Domain/EntityFactory/PostFromModelEntityFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Post/Domain/EntityFactory/PostFromModelEntityFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Post/Infrastructure/InfrastructureTest/PostRepositoryTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Post/Infrastructure/InfrastructureTest/PostRepository_addTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +165,7 @@
     "PHPUnit.メイン.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/show-post-index-infrastructure",
+    "git-widget-placeholder": "feautre/show-post-index-application-dto",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -202,7 +202,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix: test-environment-fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: test-environment-fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
