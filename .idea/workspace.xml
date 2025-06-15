@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27da8af9-c148-42c6-9dab-320e0da42b45" name="変更" comment="fix: test-environment-fix">
-      <change afterPath="$PROJECT_DIR$/src/app/Post/Presentation/PresentationTest/Controller/PostController_getEachUserPostTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Post/Tests/GetEachUserPostTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Post/Presentation/Controller/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Post/Presentation/Controller/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +22,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "feature/show-each-post-presentation-controller"
+    "git-widget-placeholder": "feature/show-each-post-test"
   }
 }]]></component>
   <component name="RunManager">

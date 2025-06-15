@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Route;
 Route::post('logout', [UserController::class, 'logout'])->name('logout');
 
 Route::prefix('users')->name('user.')->group(function () {
+
     Route::post('register', [UserController::class, 'createUser'])->name('register');
     Route::post('login', [UserController::class, 'login'])->name('login');
-    Route::get('/show/{id}', [UserController::class, 'showUser'])->name('show');
+    Route::get('show/{id}', [UserController::class, 'showUser'])->name('show');
     Route::put('{id}', [UserController::class, 'update'])->name('update');
 
-    Route::post('{userId}/posts', [PostController::class, 'create'])->name('posts.create');
-    Route::get('{userId}/posts', [PostController::class, 'getAllPosts'])->name('posts.getAllPosts');
+    Route::prefix('{userId}/posts')->name('posts.')->group(function () {
+        Route::post('/', [PostController::class, 'create'])->name('create');
+        Route::get('/', [PostController::class, 'getAllPosts'])->name('getAllPosts');
+        Route::get('{postId}', [PostController::class, 'getEachPost'])->name('getEachPost');
+    });
 });
