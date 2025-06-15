@@ -14,4 +14,5 @@ Route::prefix('users')->name('user.')->group(function () {
     Route::put('{id}', [UserController::class, 'update'])->name('update');
 
     Route::post('{userId}/posts', [PostController::class, 'create'])->name('posts.create');
+    Route::get('{userId}/posts', [PostController::class, 'getAllPosts'])->name('posts.getAllPosts');
 });
