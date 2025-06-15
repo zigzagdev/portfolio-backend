@@ -4,14 +4,14 @@ namespace App\Post\Application\UseCase;
 
 
 use App\Common\Application\Dto\Pagination;
-use App\Post\Application\QueryServiceInterface\GetAllUserPostQueryServiceInterface;
+use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
 use App\Post\Application\Dto\GetAllUserPostDto;
 use App\Post\Domain\Entity\PostEntity;
 
 class GetAllUserPostUseCase
 {
     public function __construct(
-        private readonly GetAllUserPostQueryServiceInterface $queryService
+        private readonly GetPostQueryServiceInterface $queryService
     ) {}
 
     public function handle(

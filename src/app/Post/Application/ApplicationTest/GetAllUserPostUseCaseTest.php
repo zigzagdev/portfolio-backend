@@ -3,7 +3,7 @@
 namespace App\Post\Application\ApplicationTest;
 
 use App\Common\Domain\ValueObject\UserId;
-use App\Post\Application\QueryServiceInterface\GetAllUserPostQueryServiceInterface;
+use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
 use Tests\TestCase;
 use Mockery;
 use App\Post\Application\Dto\GetAllUserPostDto;
@@ -45,9 +45,9 @@ class GetAllUserPostUseCaseTest extends TestCase
         ];
     }
 
-    private function mockQueryService(): GetAllUserPostQueryServiceInterface
+    private function mockQueryService(): GetPostQueryServiceInterface
     {
-        $mock = Mockery::mock(GetAllUserPostQueryServiceInterface::class);
+        $mock = Mockery::mock(GetPostQueryServiceInterface::class);
 
         $mock->shouldReceive('getAllUserPosts')
             ->with(
