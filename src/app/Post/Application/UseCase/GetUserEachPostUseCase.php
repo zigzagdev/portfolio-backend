@@ -2,7 +2,7 @@
 
 namespace App\Post\Application\UseCase;
 
-use App\Post\Domain\Entity\PostEntity;
+use App\Post\Application\Dto\GetUserEachPostDto;
 use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
 use App\Common\Domain\ValueObject\PostId;
 use App\Common\Domain\ValueObject\UserId;
@@ -17,18 +17,26 @@ class GetUserEachPostUseCase
     public function handle(
         int $userId,
         int $postId
-    ): ?PostEntity{
+    ): GetUserEachPostDto
+    {
+        $objectUserId = $this->buildObjectUserId($userId);
+        $objectPostId = $this->buildObjectPostId($postId);
+
         $post = $this->queryService->getEachUserPost(
-            $this->buildObjectUserId($userId),
-            $this->buildObjectPostId($postId)
+            userId: $objectUserId,
+            postId: $objectPostId
         );
 
-        return new PostEntity(
-            $post->getId(),
-            $post->getUserId(),
-            $post->getContent() ?? '',
-            $post->getMediaPath(),
-            $post->getPostVisibility()
+        if ($post === null) {
+            throw new InvalidArgumentException('Post not found for the given user.');
+        }
+
+        return new GetUserEachPostDto(
+            id: $post->getId()->getValue(),
+            userId: $post->getUserId()->getValue(),
+            content: $post->getContent(),
+            mediaPath: $post->getMediaPath(),
+            visibility: $post->getPostVisibility()->getStringValue()
         );
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Post\Application\ApplicationTest;
 
+use App\Post\Application\Dto\GetUserEachPostDto;
 use App\Post\Application\UseCase\GetUserEachPostUseCase;
 use App\Post\Domain\ValueObject\Postvisibility;
 use Tests\TestCase;
@@ -87,6 +88,6 @@ class GetUserEachPostUseCaseTest extends TestCase
             $this->arrayData()['id']
         );
 
-        $this->assertInstanceOf(PostEntity::class, $result);
+        $this->assertInstanceOf(GetUserEachPostDto::class, $result);
     }
 }
