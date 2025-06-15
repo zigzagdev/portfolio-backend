@@ -53,6 +53,7 @@ class GetUserEachPostUseCaseTest extends TestCase
         return $mock;
     }
 
+
     private function mockPostEntity(): PostEntity
     {
         $mock = Mockery::mock(PostEntity::class);
