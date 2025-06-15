@@ -2,7 +2,7 @@
 
 namespace App\Post\Application\Dto;
 
-use App\Post\Application\Dto\GetAllUserPostDto as PostDto;
+use App\Post\Application\Dto\GetUserEachPostDto as PostDto;
 
 class GetAllUserPostDtoCollection
 {
