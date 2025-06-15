@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 use App\Post\Application\UseCase\GetAllUserPostUseCase;
-use App\Common\Presentation\ViewModelFactory\PaginationFactory;
+use App\Common\Presentation\ViewModelFactory\PaginationFactory as PaginationViewModelFactory;
+use App\Post\Application\Dto\GetAllUserPostDto;
+use App\Post\Presentation\ViewModel\GetAllUserPostViewModel;
 
 class PostController extends Controller
 {
@@ -65,21 +67,20 @@ class PostController extends Controller
             );
 
             $viewModels = array_map(
-                fn($item) => $item->toArray(),
+                fn(GetAllUserPostDto $dto) => GetAllUserPostViewModel::build($dto)->toArray(),
                 $dto->getData()
             );
 
-            $paginationViewModel = PaginationFactory::build(
+            $paginationViewModel = PaginationViewModelFactory::build(
                 $dto,
                 $viewModels
-            );
-
-            $response = $paginationViewModel->toArray();
+            )->toArray();
 
             return response()->json([
                 'status' => 'success',
-                'data' => $response,
-            ], 200);
+                'data' => $paginationViewModel['data'],
+                'meta' => $paginationViewModel['meta'],
+            ]);
 
         } catch (Throwable $e) {
             return response()->json([
