@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Throwable;
 use App\Post\Application\UseCase\GetAllUserPostUseCase;
 use App\Common\Presentation\ViewModelFactory\PaginationFactory as PaginationViewModelFactory;
-use App\Post\Application\Dto\GetAllUserPostDto;
+use App\Post\Application\Dto\GetUserEachPostDto;
 use App\Post\Presentation\ViewModel\GetAllUserPostViewModel;
 
 class PostController extends Controller
@@ -67,7 +67,7 @@ class PostController extends Controller
             );
 
             $viewModels = array_map(
-                fn(GetAllUserPostDto $dto) => GetAllUserPostViewModel::build($dto)->toArray(),
+                fn(GetUserEachPostDto $dto) => GetAllUserPostViewModel::build($dto)->toArray(),
                 $dto->getData()
             );
 
