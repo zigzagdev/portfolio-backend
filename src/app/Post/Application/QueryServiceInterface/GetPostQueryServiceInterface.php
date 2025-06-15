@@ -4,8 +4,10 @@ namespace App\Post\Application\QueryServiceInterface;
 
 use App\Post\Domain\Entity\PostEntity;
 use App\Common\Application\Dto\Pagination as PaginationDto;
+use App\Common\Domain\ValueObject\PostId;
+use App\Common\Domain\ValueObject\UserId;
 
-interface GetAllUserPostQueryServiceInterface
+interface GetPostQueryServiceInterface
 {
     public function getAllUserPosts(
         int $userId,
@@ -14,7 +16,7 @@ interface GetAllUserPostQueryServiceInterface
     ): PaginationDto;
 
     public function getEachUserPost(
-        int $userId,
-        int $postId
+        UserId $userId,
+        PostId $postId
     ): ?PostEntity;
 }

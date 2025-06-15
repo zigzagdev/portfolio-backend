@@ -4,10 +4,10 @@ namespace App\Post\Infrastructure\InfrastructureTest;
 
 use App\Common\Application\Dto\Pagination;
 use App\Post\Domain\Entity\PostEntity;
-use App\Post\Infrastructure\QueryService\GetAllUserPostQueryService;
+use App\Post\Infrastructure\QueryService\GetPostQueryService;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-use App\Post\Application\QueryServiceInterface\GetAllUserPostQueryServiceInterface;
+use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
 use App\Post\Domain\Entity\PostEntityCollection;
 use Mockery;
 use App\Post\Domain\EntityFactory\PostFromModelEntityFactory;
@@ -33,7 +33,8 @@ class GetAllUserPostQueryServiceTest extends TestCase
     {
         parent::setUp();
         $this->refresh();
-        $this->user = User::create([
+        $this->user = new User();
+        User::create([
             'first_name' => 'Sergio',
             'last_name' => 'Ramos',
             'email' => 'real-madrid15@test.com',
@@ -43,10 +44,14 @@ class GetAllUserPostQueryServiceTest extends TestCase
             'skills' => ['Football', 'Leadership'],
             'profile_image' => 'https://example.com/sergio.jpg'
         ]);
+
         $this->post = new Post();
         $this->createDummyPosts();
 
-        $this->queryService = new GetAllUserPostQueryService($this->post);
+        $this->queryService = new GetPostQueryService(
+            $this->post,
+            $this->user
+        );
     }
 
     protected function tearDown(): void
