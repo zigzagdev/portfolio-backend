@@ -2,7 +2,7 @@
 
 namespace App\Post\Presentation\ViewModel;
 
-use App\Post\Application\Dto\GetAllUserPostDto;
+use App\Post\Application\Dto\GetUserEachPostDto;
 
 class GetAllUserPostViewModel
 {
@@ -14,7 +14,7 @@ class GetAllUserPostViewModel
         private string $visibility
     ) {}
 
-    public static function build(GetAllUserPostDto $data): self
+    public static function build(GetUserEachPostDto $data): self
     {
         $dtoArray = $data->toArray();
         return new self(

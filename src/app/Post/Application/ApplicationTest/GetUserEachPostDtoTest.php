@@ -3,9 +3,9 @@
 namespace App\Post\Application\ApplicationTest;
 
 use Tests\TestCase;
-use App\Post\Application\Dto\GetAllUserPostDto;
+use App\Post\Application\Dto\GetUserEachPostDto;
 
-class GetAllUserPostDtoTest extends TestCase
+class GetUserEachPostDtoTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -31,15 +31,15 @@ class GetAllUserPostDtoTest extends TestCase
     public function test_get_all_user_post_dto() : void
     {
         $data = $this->arrayRequestData();
-        $dto = GetAllUserPostDto::build($data);
+        $dto = GetUserEachPostDto::build($data);
 
-        $this->assertInstanceOf(GetAllUserPostDto::class, $dto);
+        $this->assertInstanceOf(GetUserEachPostDto::class, $dto);
     }
 
     public function test_get_all_user_post_dto_values() : void
     {
         $data = $this->arrayRequestData();
-        $dto = GetAllUserPostDto::build($data);
+        $dto = GetUserEachPostDto::build($data);
 
         $this->assertEquals($dto->id, $data['id']);
         $this->assertEquals($dto->userId, $data['userId']);

@@ -4,7 +4,7 @@ namespace App\Post\Presentation\PresentationTest;
 
 use App\Post\Presentation\ViewModel\GetAllUserPostViewModel;
 use Tests\TestCase;
-use App\Post\Application\Dto\GetAllUserPostDto;
+use App\Post\Application\Dto\GetUserEachPostDto;
 use Mockery;
 
 class GetAllUserPostViewModelTest extends TestCase
@@ -41,9 +41,9 @@ class GetAllUserPostViewModelTest extends TestCase
         ];
     }
 
-    private function mockDto(): GetAllUserPostDto
+    private function mockDto(): GetUserEachPostDto
     {
-        $mock = Mockery::mock(GetAllUserPostDto::class);
+        $mock = Mockery::mock(GetUserEachPostDto::class);
 
         $mock
             ->shouldReceive('toArray')
