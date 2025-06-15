@@ -2,15 +2,13 @@
 
 namespace App\Common\Presentation\ViewModel;
 
-use App\Common\Application\Dto\Pagination as PaginationDto;
-
 class Pagination
 {
     public function __construct(
         private array $data,
         private int $currentPage,
-        private int $from,
-        private int $to,
+        private ?int $from,
+        private ?int $to,
         private int $perPage,
         private string $path,
         private int $lastPage,
@@ -24,11 +22,9 @@ class Pagination
 
     public function toArray(): array
     {
-        return array_merge(
-            [
-                'data' => $this->data
-            ],
-            [
+        return [
+            'data' => $this->data,
+            'meta' => [
                 'currentPage' => $this->currentPage,
                 'from' => $this->from,
                 'to' => $this->to,
@@ -40,8 +36,8 @@ class Pagination
                 'lastPageUrl' => $this->lastPageUrl,
                 'nextPageUrl' => $this->nextPageUrl,
                 'prevPageUrl' => $this->prevPageUrl,
-                'links' => $this->links
+                'links' => $this->links,
             ]
-        );
+        ];
     }
 }

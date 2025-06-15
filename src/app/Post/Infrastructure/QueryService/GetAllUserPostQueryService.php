@@ -6,11 +6,14 @@ use App\Models\Post;
 use App\Post\Application\QueryServiceInterface\GetAllUserPostQueryServiceInterface;
 use App\Post\Domain\EntityFactory\PostFromModelEntityFactory;
 use App\Common\Application\Dto\Pagination as PaginationDto;
+use App\Models\User;
+use ErrorException;
 
 class GetAllUserPostQueryService implements GetAllUserPostQueryServiceInterface
 {
     public function __construct(
-        private readonly Post $post
+        private readonly Post $post,
+        private readonly User $user
     ) {}
 
     public function getAllUserPosts(
@@ -19,6 +22,10 @@ class GetAllUserPostQueryService implements GetAllUserPostQueryServiceInterface
         int $currentPage,
     ): PaginationDto
     {
+        if (!User::where('id', $userId)->exists()) {
+            throw new ErrorException($userId);
+        }
+
         $userPosts = $this->post
             ->where('user_id', $userId)
             ->orderBy('created_at', 'desc')
