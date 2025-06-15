@@ -4,6 +4,7 @@ namespace App\Post\Presentation\Controller;
 
 use App\Http\Controllers\Controller;
 use App\Post\Application\UseCase\CreateUseCase;
+use App\Post\Application\UseCase\GetUserEachPostUseCase;
 use App\Post\Presentation\ViewModel\CreatePostViewModel;
 use App\Post\Application\UseCommand\CreatePostUseCommand;
 use Illuminate\Http\JsonResponse;
@@ -81,6 +82,33 @@ class PostController extends Controller
                 'data' => $paginationViewModel['data'],
                 'meta' => $paginationViewModel['meta'],
             ]);
+
+        } catch (Throwable $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getEachPost(
+        int $userId,
+        int $postId,
+        GetUserEachPostUseCase $useCase
+    ): JsonResponse
+    {
+        try {
+            $dto = $useCase->handle(
+                userId: $userId,
+                postId: $postId
+            );
+
+            $viewModelArray = GetAllUserPostViewModel::build($dto)->toArray();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $viewModelArray,
+            ], 200);
 
         } catch (Throwable $e) {
             return response()->json([
