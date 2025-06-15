@@ -2,14 +2,17 @@
 
 namespace App\Post\Infrastructure\QueryService;
 
+use App\Common\Domain\ValueObject\PostId;
+use App\Common\Domain\ValueObject\UserId;
 use App\Models\Post;
-use App\Post\Application\QueryServiceInterface\GetAllUserPostQueryServiceInterface;
+use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
+use App\Post\Domain\Entity\PostEntity;
 use App\Post\Domain\EntityFactory\PostFromModelEntityFactory;
 use App\Common\Application\Dto\Pagination as PaginationDto;
 use App\Models\User;
 use ErrorException;
 
-class GetAllUserPostQueryService implements GetAllUserPostQueryServiceInterface
+class GetPostQueryService implements GetPostQueryServiceInterface
 {
     public function __construct(
         private readonly Post $post,
@@ -37,6 +40,23 @@ class GetAllUserPostQueryService implements GetAllUserPostQueryServiceInterface
             );
 
         return $this->paginationDto($userPosts->toArray());
+    }
+
+    public function getEachUserPost(
+        UserId $userId,
+        PostId $postId
+    ): ?PostEntity
+    {
+        $post = $this->post
+            ->where('user_id', $userId->getValue())
+            ->where('id', $postId->getValue())
+            ->first();
+
+        if (!$post) {
+            return null;
+        }
+
+        return PostFromModelEntityFactory::build($post->toArray());
     }
 
     private function paginationDto(
