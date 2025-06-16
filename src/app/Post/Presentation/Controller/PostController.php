@@ -4,6 +4,7 @@ namespace App\Post\Presentation\Controller;
 
 use App\Http\Controllers\Controller;
 use App\Post\Application\UseCase\CreateUseCase;
+use App\Post\Application\UseCase\GetUserEachPostUseCase;
 use App\Post\Presentation\ViewModel\CreatePostViewModel;
 use App\Post\Application\UseCommand\CreatePostUseCommand;
 use Illuminate\Http\JsonResponse;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Throwable;
 use App\Post\Application\UseCase\GetAllUserPostUseCase;
 use App\Common\Presentation\ViewModelFactory\PaginationFactory as PaginationViewModelFactory;
-use App\Post\Application\Dto\GetAllUserPostDto;
+use App\Post\Application\Dto\GetUserEachPostDto;
 use App\Post\Presentation\ViewModel\GetAllUserPostViewModel;
 
 class PostController extends Controller
@@ -67,7 +68,7 @@ class PostController extends Controller
             );
 
             $viewModels = array_map(
-                fn(GetAllUserPostDto $dto) => GetAllUserPostViewModel::build($dto)->toArray(),
+                fn(GetUserEachPostDto $dto) => GetAllUserPostViewModel::build($dto)->toArray(),
                 $dto->getData()
             );
 
@@ -81,6 +82,33 @@ class PostController extends Controller
                 'data' => $paginationViewModel['data'],
                 'meta' => $paginationViewModel['meta'],
             ]);
+
+        } catch (Throwable $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getEachPost(
+        int $userId,
+        int $postId,
+        GetUserEachPostUseCase $useCase
+    ): JsonResponse
+    {
+        try {
+            $dto = $useCase->handle(
+                userId: $userId,
+                postId: $postId
+            );
+
+            $viewModelArray = GetAllUserPostViewModel::build($dto)->toArray();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $viewModelArray,
+            ], 200);
 
         } catch (Throwable $e) {
             return response()->json([

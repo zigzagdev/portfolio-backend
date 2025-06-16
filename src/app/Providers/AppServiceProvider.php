@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Post\Application\QueryServiceInterface\GetAllUserPostQueryServiceInterface;
+use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
 use App\Post\Domain\RepositoryInterface\PostRepositoryInterface;
 use App\Post\Infrastructure\Repository\PostRepository;
 use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
@@ -14,7 +14,7 @@ use App\User\Infrastructure\Service\BcryptPasswordHasher;
 use App\User\Domain\Service\GenerateTokenInterface;
 use App\User\Infrastructure\Service\GenerateTokenService;
 use App\User\Domain\Service\AuthServiceInterface;
-use App\Post\Infrastructure\QueryService\GetAllUserPostQueryService;
+use App\Post\Infrastructure\QueryService\GetPostQueryService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -54,8 +54,8 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            GetAllUserPostQueryServiceInterface::class,
-            GetAllUserPostQueryService::class
+            GetPostQueryServiceInterface::class,
+            GetPostQueryService::class
         );
     }
 

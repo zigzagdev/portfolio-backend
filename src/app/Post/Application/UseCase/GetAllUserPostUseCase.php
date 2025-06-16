@@ -4,14 +4,14 @@ namespace App\Post\Application\UseCase;
 
 
 use App\Common\Application\Dto\Pagination;
-use App\Post\Application\QueryServiceInterface\GetAllUserPostQueryServiceInterface;
-use App\Post\Application\Dto\GetAllUserPostDto;
+use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
+use App\Post\Application\Dto\GetUserEachPostDto;
 use App\Post\Domain\Entity\PostEntity;
 
 class GetAllUserPostUseCase
 {
     public function __construct(
-        private readonly GetAllUserPostQueryServiceInterface $queryService
+        private readonly GetPostQueryServiceInterface $queryService
     ) {}
 
     public function handle(
@@ -27,7 +27,7 @@ class GetAllUserPostUseCase
         );
 
         $dtoList = array_map(
-            fn(PostEntity $e) => new GetAllUserPostDto(
+            fn(PostEntity $e) => new GetUserEachPostDto(
                 id: $e->getId()->getValue(),
                 userId: $e->getUserId()->getValue(),
                 content: $e->getContent(),

@@ -2,7 +2,7 @@
 
 namespace App\Post\Application\Dto;
 
-class GetAllUserPostDto
+class GetUserEachPostDto
 {
     public function __construct(
         public readonly int $id,

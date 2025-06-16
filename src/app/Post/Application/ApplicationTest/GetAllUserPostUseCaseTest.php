@@ -3,10 +3,10 @@
 namespace App\Post\Application\ApplicationTest;
 
 use App\Common\Domain\ValueObject\UserId;
-use App\Post\Application\QueryServiceInterface\GetAllUserPostQueryServiceInterface;
+use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
 use Tests\TestCase;
 use Mockery;
-use App\Post\Application\Dto\GetAllUserPostDto;
+use App\Post\Application\Dto\GetUserEachPostDto;
 use App\Post\Application\Dto\GetAllUserPostDtoCollection;
 use App\Common\Application\Dto\Pagination;
 use App\Common\Domain\ValueObject\PostId;
@@ -45,9 +45,9 @@ class GetAllUserPostUseCaseTest extends TestCase
         ];
     }
 
-    private function mockQueryService(): GetAllUserPostQueryServiceInterface
+    private function mockQueryService(): GetPostQueryServiceInterface
     {
-        $mock = Mockery::mock(GetAllUserPostQueryServiceInterface::class);
+        $mock = Mockery::mock(GetPostQueryServiceInterface::class);
 
         $mock->shouldReceive('getAllUserPosts')
             ->with(
@@ -91,9 +91,9 @@ class GetAllUserPostUseCaseTest extends TestCase
         return $mock;
     }
 
-    private function mockDto(): GetAllUserPostDto
+    private function mockDto(): GetUserEachPostDto
     {
-        $mock = Mockery::mock(GetAllUserPostDto::class);
+        $mock = Mockery::mock(GetUserEachPostDto::class);
 
         $mock->shouldReceive('getId')
             ->andReturn(new PostId($this->arrayRequestData()[0]['id']));
