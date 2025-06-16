@@ -9,4 +9,8 @@ interface PostRepositoryInterface
     public function save(
         PostEntity $entity
     ): ?PostEntity;
+
+    public function editById(
+        PostEntity $entity
+    ): PostEntity;
 }
