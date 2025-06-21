@@ -14,10 +14,10 @@ class EditPostViewModel
     {
         return [
             'id' => $this->dto->getId()->getValue(),
-            'userId' => $this->dto->getUserid()->getValue(),
+            'user_id' => $this->dto->getUserid()->getValue(),
             'content' => $this->dto->getContent(),
-            'mediaPath' => $this->dto->getMediaPath(),
-            'visibility' => $this->dto->getVisibility()->getValue()->toLabel(),
+            'media_path' => $this->dto->getMediaPath(),
+            'visibility' => strtolower($this->dto->getVisibility()->getValue()->toLabel())
         ];
     }
 }
