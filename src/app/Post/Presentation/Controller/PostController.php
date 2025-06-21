@@ -117,4 +117,39 @@ class PostController extends Controller
             ], 500);
         }
     }
+
+    public function edit(
+        Request $request,
+        int $user_id,
+        int $post_id,
+        EditUseCase $useCase
+    ): JsonResponse {
+        DB::connection('mysql')->beginTransaction();
+        try {
+
+            $command = EditPostUseCommand::build(
+                array_merge(
+                    $request->toArray(),
+                    ['userId' => $user_id],
+                    ['id' => $post_id]
+                )
+            );
+
+            $dto = $useCase->handle($command);
+            $viewModel = new EditPostViewModel($dto);
+
+            DB::connection('mysql')->commit();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $viewModel->toArray(),
+            ], 200);
+        } catch (Throwable $e) {
+            DB::connection('mysql')->rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
