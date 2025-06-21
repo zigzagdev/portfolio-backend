@@ -61,8 +61,8 @@ class PostController extends Controller
             $command = EditPostUseCommand::build(
                 array_merge(
                     $request->toArray(),
-                    ['user_id' => $user_id],
-                    ['post_id' => $post_id]
+                    ['userId' => $user_id],
+                    ['id' => $post_id]
                 )
             );
 

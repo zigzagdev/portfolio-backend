@@ -12,7 +12,6 @@ class Post extends Model
     protected $connection = 'mysql';
 
     protected $fillable = [
-        'title',
         'content',
         'user_id',
         'media_path',
