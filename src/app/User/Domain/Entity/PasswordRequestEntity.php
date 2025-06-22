@@ -17,11 +17,7 @@ class PasswordRequestEntity
         private readonly DateTimeImmutable $requestedAt,
         private readonly ExpiredAt $expiredAt
     )
-    {
-        if (empty($this->token->getValue())) {
-            throw new InvalidArgumentException('Token cannot be empty.');
-        }
-    }
+    {}
 
     public function getId(): int
     {
