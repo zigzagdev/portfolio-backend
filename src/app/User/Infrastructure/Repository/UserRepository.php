@@ -9,6 +9,8 @@ use App\User\Domain\RepositoryInterface\PasswordHasherInterface;
 use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Email;
 use App\Common\Domain\ValueObject\UserId;
+use App\User\Domain\ValueObject\PasswordResetToken;
+use Carbon\Carbon;
 use Exception;
 use LogicException;
 
@@ -90,5 +92,29 @@ class UserRepository implements UserRepositoryInterface
         );
 
         return UserFromModelEntityFactory::buildFromModel($this->user->find($entity->getUserId()->getValue()));
+    }
+
+    public function savePasswordResetToken(
+        UserId $userId,
+        PasswordResetToken $token
+    ): void {
+        $targetUser = $this->user
+            ->with(['passwordResetRequests'])
+            ->where('id', $userId->getValue())
+            ->first();
+
+        if ($targetUser === null) {
+            throw new Exception('User not found');
+        }
+
+        if (!empty($targetUser->passwordResetRequests())) {
+            $targetUser->passwordResetRequests()->updateOrCreate([
+                'token' => $token->getValue(),
+                'requested_at' => Carbon::now(),
+                'expired_at' => Carbon::now()->addHour(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }
     }
 }
