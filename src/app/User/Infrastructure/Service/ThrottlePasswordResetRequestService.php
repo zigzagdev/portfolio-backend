@@ -14,12 +14,12 @@ class ThrottlePasswordResetRequestService implements ThrottlePasswordResetReques
 
     public function checkThrottling(User $user): void
     {
-        if (!$user->passwordResetRequests) {
+        if (!$user->passwordResetRequests()) {
             throw new InvalidArgumentException('User does not have password reset requests.');
         }
 
         $requests = $user
-            ->passwordResetRequests
+            ->passwordResetRequests()
             ->where('created_at', '>=', now()->subSeconds(self::TIME_FRAME))
             ->where('user_id', $user->id)
             ->count();
