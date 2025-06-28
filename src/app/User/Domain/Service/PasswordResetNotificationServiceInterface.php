@@ -2,9 +2,9 @@
 
 namespace App\User\Domain\Service;
 
-use App\Models\User;
+use App\User\Domain\Entity\UserEntity;
 
 interface PasswordResetNotificationServiceInterface
 {
-    public function sendResetLink(User $user, string $token): void;
+    public function sendResetLink(UserEntity $entity, string $token): void;
 }
