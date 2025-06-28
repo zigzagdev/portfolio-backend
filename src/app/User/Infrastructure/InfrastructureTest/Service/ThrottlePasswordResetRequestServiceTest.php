@@ -2,12 +2,19 @@
 
 namespace App\User\Infrastructure\InfrastructureTest\Service;
 
+use App\Common\Domain\ValueObject\UserId;
+use App\User\Domain\Entity\UserEntity;
+use App\User\Domain\Factory\UserEntityFactory;
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\ValueObject\Password;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use App\Models\User;
+use Mockery;
 use App\Models\PasswordResetRequest;
 use App\User\Infrastructure\Service\ThrottlePasswordResetRequestService;
+use App\User\Domain\Factory\UserFromModelEntityFactory;
 
 class ThrottlePasswordResetRequestServiceTest extends TestCase
 {
@@ -49,6 +56,47 @@ class ThrottlePasswordResetRequestServiceTest extends TestCase
         ]);
     }
 
+    private function mockEntity(): UserEntity
+    {
+        $factory  = Mockery::mock(
+            'alias' . UserEntityFactory::class
+        );
+
+        $entity = Mockery::mock(UserEntity::class);
+
+        $factory
+            ->shouldReceive('build')
+            ->andReturn($entity);
+
+        $entity
+            ->shouldReceive('getUserId')
+            ->andReturn(new UserId($this->user->id));
+
+        $entity
+            ->shouldReceive('getFirstName')
+            ->andReturn($this->createUser()['first_name']);
+
+        $entity
+            ->shouldReceive('getLastName')
+            ->andReturn($this->createUser()['last_name']);
+
+        $hashed = bcrypt($this->createUser()['password']);
+        $entity
+            ->shouldReceive('getPassword')
+            ->andReturn(Password::fromHashed($hashed));
+
+        $entity
+            ->shouldReceive('getEmail')
+            ->andReturn(new Email($this->createUser()['email']));
+
+        $entity
+            ->shouldReceive('getBio')
+            ->andReturn($this->createUser()['bio']);
+
+        return $entity;
+    }
+
+
     public function test_throttle_password_request_correct_request(): void
     {
         for ($i = 0; $i < 3; $i++) {
@@ -63,10 +111,10 @@ class ThrottlePasswordResetRequestServiceTest extends TestCase
         }
 
 
-        $service = new ThrottlePasswordResetRequestService();
+        $service = new ThrottlePasswordResetRequestService(new User());
 
         $this->expectNotToPerformAssertions();
-        $service->checkThrottling($this->user);
+        $service->checkThrottling($this->mockEntity());
     }
 
     public function test_throttle_password_request_incorrect_request(): void
@@ -83,9 +131,9 @@ class ThrottlePasswordResetRequestServiceTest extends TestCase
         }
 
         $this->expectException(TooManyRequestsHttpException::class);
-        $service = new ThrottlePasswordResetRequestService();
+        $service = new ThrottlePasswordResetRequestService(new User());
 
-        $service->checkThrottling($this->user);
+        $service->checkThrottling($this->mockEntity());
     }
 
     public function test_throttle_password_request_wrong_user(): void
@@ -102,11 +150,12 @@ class ThrottlePasswordResetRequestServiceTest extends TestCase
         }
 
         $wrongUser = $this->createUser();
+        $wrongUserEntity = UserFromModelEntityFactory::buildFromModel($wrongUser);
 
-        $service = new ThrottlePasswordResetRequestService();
+        $service = new ThrottlePasswordResetRequestService(new User());
 
         $this->expectNotToPerformAssertions();
 
-        $service->checkThrottling($wrongUser);
+        $service->checkThrottling($wrongUserEntity);
     }
 }

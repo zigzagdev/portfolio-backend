@@ -2,6 +2,7 @@
 
 namespace App\User\Infrastructure\Service;
 
+use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Service\ThrottlePasswordResetRequestServiceInterface;
 use App\Models\User;
 use InvalidArgumentException;
@@ -12,8 +13,15 @@ class ThrottlePasswordResetRequestService implements ThrottlePasswordResetReques
     private const MAX_REQUESTS = 5;
     private const TIME_FRAME = 3600;
 
-    public function checkThrottling(User $user): void
+    public function __construct(
+        private readonly User $userModel
+    ) {}
+
+
+    public function checkThrottling(UserEntity $entity): void
     {
+        $user = $this->userModel->find($entity->getUserId()?->getValue());
+
         if (!$user->passwordResetRequests()) {
             throw new InvalidArgumentException('User does not have password reset requests.');
         }
