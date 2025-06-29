@@ -24,7 +24,7 @@ class PasswordResetTokenValidatorService implements PasswordResetTokenValidatorI
         return DB::table('password_reset_requests')
             ->where('token', $token)
             ->where('user_id', $userId)
-            ->where('created_at', '>=', now()->subMinutes(60))
+            ->where('requested_at', '>=', now()->subMinutes(60))
             ->exists();
     }
 }
