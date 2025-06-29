@@ -117,4 +117,22 @@ class UserRepository implements UserRepositoryInterface
             ]);
         }
     }
+
+    public function resetPassword(
+        UserId $userId,
+        PasswordResetToken $token,
+        string $newPassword
+    ): void {
+        $userModel = $this->user->find($userId->getValue());
+
+        if ($userModel === null) {
+            throw new Exception('User not found');
+        }
+
+        $hashedPassword = $this->hasher->hash($newPassword);
+
+        $userModel->update([
+            'password' => $hashedPassword
+        ]);
+    }
 }
