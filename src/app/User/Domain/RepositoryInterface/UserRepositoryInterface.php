@@ -23,4 +23,10 @@ interface UserRepositoryInterface
         UserId $userId,
         PasswordResetToken $token
     ): void;
+
+    public function resetPassword(
+        UserId $userId,
+        PasswordResetToken $token,
+        string $newPassword
+    ): void;
 }
