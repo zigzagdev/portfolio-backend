@@ -38,7 +38,7 @@ class EditPostUseCommand
             id: $request['id'],
             userId: $request['userId'],
             content: $request['content'],
-            mediaPath: $request['mediaPath'] ?? null,
+            mediaPath: $request['media_path'] ?? null,
             visibility: $request['visibility']
         );
     }
