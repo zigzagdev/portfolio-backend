@@ -10,11 +10,13 @@ use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\Service\PasswordResetGenerateTokenServiceInterface;
 use App\User\Domain\Service\PasswordResetNotificationServiceInterface;
 use App\User\Domain\Service\PasswordResetRequestLimitationServiceInterface;
+use App\User\Domain\Service\PasswordResetTokenValidatorInterface;
 use App\User\Domain\Service\ThrottlePasswordResetRequestServiceInterface;
 use App\User\Infrastructure\Repository\UserRepository;
 use App\User\Infrastructure\Service\JwtAuthService;
 use App\User\Infrastructure\Service\PasswordResetGenerateTokenService;
 use App\User\Infrastructure\Service\PasswordResetNotificationService;
+use App\User\Infrastructure\Service\PasswordResetTokenValidatorService;
 use App\User\Infrastructure\Service\ThrottlePasswordResetRequestService;
 use Illuminate\Support\ServiceProvider;
 use App\User\Infrastructure\Service\BcryptPasswordHasher;
@@ -78,6 +80,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ThrottlePasswordResetRequestServiceInterface::class,
             ThrottlePasswordResetRequestService::class
+        );
+
+        $this->app->bind(
+            PasswordResetTokenValidatorInterface::class,
+            PasswordResetTokenValidatorService::class
         );
     }
 
