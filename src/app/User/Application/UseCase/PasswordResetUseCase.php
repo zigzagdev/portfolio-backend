@@ -6,6 +6,7 @@ use App\User\Domain\RepositoryInterface\UserRepositoryInterface;
 use App\User\Domain\Service\PasswordResetTokenValidatorInterface;
 use App\User\Domain\ValueObject\PasswordResetToken;
 use App\Common\Domain\ValueObject\UserId;
+use Exception;
 
 class PasswordResetUseCase
 {
@@ -15,36 +16,33 @@ class PasswordResetUseCase
     ) {}
 
     public function handle(
-        string $userId,
         string $token,
         string $newPassword
     ): void
     {
-        $objectUserId = $this->buildObjectUserId($userId);
         $objectToken = $this->buildObjectToken($token);
 
+        if (!$this->tokenValidator->validate($objectToken->getValue())) {
+            throw new Exception('Invalid or expired token.');
+        }
 
-        $this->tokenValidator
-            ->validate(
-                $objectUserId->getValue(),
-                $objectToken->getValue()
-            );
+        $userId = $this->tokenValidator->getUserIdByToken($objectToken->getValue());
+        if (is_null($userId)) {
+            throw new Exception('User not found for the given token.');
+        }
 
-        $this->repository
-            ->resetPassword(
-                $objectUserId,
-                $objectToken,
-                $newPassword
-            );
-    }
+        $objectUserId = $this->buildObjectUserId($userId);
 
-    private function buildObjectUserId(string $userId): UserId
-    {
-        return new UserId($userId);
+        $this->repository->resetPassword($objectUserId, $objectToken, $newPassword);
     }
 
     private function buildObjectToken(string $token): PasswordResetToken
     {
         return new PasswordResetToken($token);
+    }
+
+    private function buildObjectUserId($userId): UserId
+    {
+        return new UserId($userId);
     }
 }

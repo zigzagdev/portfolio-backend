@@ -210,16 +210,14 @@ class UserController extends Controller
         DB::beginTransaction();
 
         try {
-
-            $userId = $request->input('user_id');
             $token = $request->input('token');
             $newPassword = $request->input('new_password');
 
-            if (empty($newPassword) || empty($token) || empty($userId)) {
-                throw new Exception('User ID, token, and new password are required.');
+            if (empty($token) || empty($newPassword)) {
+                throw new Exception('Token, and new password are required.');
             }
 
-            $useCase->handle($userId, $token, $newPassword);
+            $useCase->handle($token, $newPassword);
 
             DB::commit();
 
