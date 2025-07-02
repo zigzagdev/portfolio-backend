@@ -5,6 +5,7 @@ namespace App\User\Presentation\Controller;
 use App\Http\Controllers\Controller;
 use App\User\Application\Factory\RegisterUserCommandFactory;
 use App\User\Application\UseCase\LoginUserUseCase;
+use App\User\Application\UseCase\PasswordResetUseCase;
 use App\User\Application\UseCase\ShowUserUseCase;
 use App\User\Presentation\ViewModel\Factory\RegisterUserViewModelFactory;
 use App\User\Presentation\ViewModel\ShowUserViewModel;
@@ -199,6 +200,30 @@ class UserController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage(),
             ], 500);
+        }
+    }
+
+    public function passwordReset(
+        Request $request,
+        PasswordResetUseCase $useCase
+    ): void {
+        DB::beginTransaction();
+
+        try {
+            $token = $request->input('token');
+            $newPassword = $request->input('new_password');
+
+            if (empty($token) || empty($newPassword)) {
+                throw new Exception('Token, and new password are required.');
+            }
+
+            $useCase->handle($token, $newPassword);
+
+            DB::commit();
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new Exception('Password reset failed: ' . $e->getMessage());
         }
     }
 }
