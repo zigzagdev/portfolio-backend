@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    public function passwordResetRequests(): hasMany
+    {
+        return $this->hasMany(PasswordResetRequest::class);
+    }
 }

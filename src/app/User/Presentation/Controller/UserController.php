@@ -5,6 +5,7 @@ namespace App\User\Presentation\Controller;
 use App\Http\Controllers\Controller;
 use App\User\Application\Factory\RegisterUserCommandFactory;
 use App\User\Application\UseCase\LoginUserUseCase;
+use App\User\Application\UseCase\PasswordResetUseCase;
 use App\User\Application\UseCase\ShowUserUseCase;
 use App\User\Presentation\ViewModel\Factory\RegisterUserViewModelFactory;
 use App\User\Presentation\ViewModel\ShowUserViewModel;
@@ -14,13 +15,14 @@ use App\User\Application\UseCase\RegisterUserUsecase;
 use App\User\Application\UseCase\UpdateUseCase;
 use App\User\Application\UseCommand\UpdateUserCommand;
 use App\User\Presentation\ViewModel\UpdateUserViewModel;
-use Illuminate\Support\Facades\Auth;
+use App\User\Application\UseCase\RequestUserPasswordResetUseCase;
 use Illuminate\Support\Facades\DB;
 use App\User\Application\UseCase\LogoutUserUseCase;
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Throwable;
+use function Symfony\Component\Translation\t;
 
 class UserController extends Controller
 {
@@ -164,6 +166,64 @@ class UserController extends Controller
                 'status' => 'error',
                 'message' => 'Invalid or expired token',
             ], 401);
+        }
+    }
+
+    public function passwordResetRequest(
+        Request $request,
+        RequestUserPasswordResetUseCase $useCase
+    ): JsonResponse {
+        DB::beginTransaction();
+
+        try {
+            $email = $request->input('email');
+
+            if (empty($email)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Email is required',
+                ], 400);
+            }
+
+            $useCase->handle($email);
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Password reset link sent to your email.',
+            ], 200);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function passwordReset(
+        Request $request,
+        PasswordResetUseCase $useCase
+    ): void {
+        DB::beginTransaction();
+
+        try {
+            $token = $request->input('token');
+            $newPassword = $request->input('new_password');
+
+            if (empty($token) || empty($newPassword)) {
+                throw new Exception('Token, and new password are required.');
+            }
+
+            $useCase->handle($token, $newPassword);
+
+            DB::commit();
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new Exception('Password reset failed: ' . $e->getMessage());
         }
     }
 }
