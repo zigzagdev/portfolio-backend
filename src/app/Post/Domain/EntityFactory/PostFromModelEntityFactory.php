@@ -18,7 +18,7 @@ class PostFromModelEntityFactory
             'content' => $request['content'],
             'mediaPath' => $request['media_path'] ?? null,
             'visibility' => new PostVisibility(
-                PostVisibilityEnum::fromString($request['visibility'])
+                PostVisibilityEnum::from($request['visibility'] ?? PostVisibilityEnum::PUBLIC)
             ),
         ]);
     }

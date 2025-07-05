@@ -11,6 +11,7 @@ use App\Post\Domain\EntityFactory\PostFromModelEntityFactory;
 use App\Common\Application\Dto\Pagination as PaginationDto;
 use App\Models\User;
 use ErrorException;
+use App\Common\Domain\Enum\PostVisibility as PostVisibilityEnum;
 
 class GetPostQueryService implements GetPostQueryServiceInterface
 {
@@ -83,5 +84,28 @@ class GetPostQueryService implements GetPostQueryServiceInterface
             prevPageUrl: $data['prev_page_url'] ?? null,
             links: $data['links'] ?? null
         );
+    }
+
+    public function getOthersAllPosts(
+        int $userId,
+        int $perPage,
+        int $currentPage
+    ): ?PaginationDto {
+
+        $allPosts = $this->post
+            ->where('user_id', '!=', $userId)
+            ->where('visibility', PostVisibilityEnum::PUBLIC->value)
+            ->paginate(
+                $perPage,
+                ['*'],
+                'page',
+                $currentPage
+            );
+
+        if (empty($allPosts)) {
+            return null;
+        }
+
+        return $this->paginationDto($allPosts->toArray());
     }
 }
