@@ -2,29 +2,10 @@
 
 namespace App\Common\Domain\Enum;
 
-use InvalidArgumentException;
-
-enum PostVisibility: string
+enum PostVisibility: int
 {
-    case PUBLIC = 'public';
-    case PRIVATE = 'private';
-
-    public static function fromString(string $value): self
-    {
-        return match ($value) {
-            self::PUBLIC->value => self::PUBLIC,
-            self::PRIVATE->value => self::PRIVATE,
-            default => throw new InvalidArgumentException("Invalid PostVisibility: {$value}"),
-        };
-    }
-
-    public function toInt(): int
-    {
-        return match ($this) {
-            self::PUBLIC => 1,
-            self::PRIVATE => 2,
-        };
-    }
+    case PUBLIC = 0;
+    case PRIVATE = 1;
 
     public function toLabel(): string
     {

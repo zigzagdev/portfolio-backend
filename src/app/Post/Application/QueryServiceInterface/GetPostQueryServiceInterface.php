@@ -19,4 +19,17 @@ interface GetPostQueryServiceInterface
         UserId $userId,
         PostId $postId
     ): ?PostEntity;
+
+    public function getOthersAllPosts(
+        int $userId,
+        int $perPage,
+        int $currentPage
+    ): ?PaginationDto;
+
+//    public function getOneAllPosts(
+//        int $userId,
+//        int $targetUserId,
+//        int $perPage,
+//        int $currentPage
+//    ): PaginationDto;
 }

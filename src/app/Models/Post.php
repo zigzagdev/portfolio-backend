@@ -23,11 +23,12 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    protected function visibility(): Attribute
+    protected $casts = [
+        'visibility' => PostVisibility::class,
+    ];
+
+    public function getVisibilityLabelAttribute(): string
     {
-        return Attribute::make(
-            get: fn ($value) => $value === 0 ? 'public' : 'private',
-            set: fn ($value) => $value === 'public' ? 0 : 1,
-        );
+        return $this->visibility->toLabel();
     }
 }
