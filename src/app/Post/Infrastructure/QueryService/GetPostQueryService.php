@@ -40,6 +40,8 @@ class GetPostQueryService implements GetPostQueryServiceInterface
                 $currentPage
             );
 
+
+
         return $this->paginationDto($userPosts->toArray());
     }
 
