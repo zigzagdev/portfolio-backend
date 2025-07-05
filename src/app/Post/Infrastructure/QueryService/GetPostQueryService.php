@@ -96,10 +96,10 @@ class GetPostQueryService implements GetPostQueryServiceInterface
             ->where('user_id', '!=', $userId)
             ->where('visibility', PostVisibilityEnum::PUBLIC->value)
             ->paginate(
-                $currentPage,
+                $perPage,
                 ['*'],
                 'page',
-                $perPage
+                $currentPage
             );
 
         if (empty($allPosts)) {

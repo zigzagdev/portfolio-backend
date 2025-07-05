@@ -85,8 +85,8 @@ class GetOthersAllPostsQueryServiceTest extends TestCase
 
         $result = $queryService->getOthersAllPosts(
             $this->user->id,
+            $this->perPage,
             $this->currentPage,
-            $this->perPage
         );
 
         $this->assertInstanceOf(
@@ -104,8 +104,8 @@ class GetOthersAllPostsQueryServiceTest extends TestCase
 
         $result = $queryService->getOthersAllPosts(
             $this->user->id,
+            $this->perPage,
             $this->currentPage,
-            $this->perPage
         );
 
         $this->assertEquals($this->currentPage, $result->getCurrentPage());
