@@ -4,6 +4,7 @@ namespace App\Post\Presentation\Controller;
 
 use App\Http\Controllers\Controller;
 use App\Post\Application\UseCase\CreateUseCase;
+use App\Post\Application\UseCase\GetOthersAllPostsUseCase;
 use App\Post\Application\UseCase\GetUserEachPostUseCase;
 use App\Post\Presentation\ViewModel\CreatePostViewModel;
 use App\Post\Application\UseCommand\CreatePostUseCommand;
@@ -146,6 +147,47 @@ class PostController extends Controller
             ], 200);
         } catch (Throwable $e) {
             DB::connection('mysql')->rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getOthersPosts(
+        Request $request,
+        int $userId,
+        GetOthersAllPostsUseCase $useCase
+    ): JsonResponse
+    {
+        try {
+            $userId = $request->route('userId', $userId);
+            $perPage = $request->get('per_page', 15);
+            $currentPage = $request->get('current_page', 1);
+
+            $data = $useCase->handle(
+                userId: $userId,
+                perPage: $perPage,
+                currentPage: $currentPage
+            );
+
+            $viewModels = array_map(
+                fn(GetUserEachPostDto $dto) => GetAllUserPostViewModel::build($dto)->toArray(),
+                $data->getData()
+            );
+
+            $paginationViewModel = PaginationViewModelFactory::build(
+                $data,
+                $viewModels
+            )->toArray();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $paginationViewModel['data'],
+                'meta' => $paginationViewModel['meta'],
+            ], 200);
+
+        } catch (Throwable $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),

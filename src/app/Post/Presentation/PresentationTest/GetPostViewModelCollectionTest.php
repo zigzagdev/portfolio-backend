@@ -84,31 +84,6 @@ class GetPostViewModelCollectionTest extends TestCase
         ];
     }
 
-    private function mockEntityCollection(): PostEntityCollection
-    {
-        $collection = Mockery::mock(PostEntityCollection::class);
-
-        $collection->shouldReceive('getPosts')
-            ->andReturn([
-                new GetPostViewModel(
-                    1,
-                    1,
-                    'Sample content',
-                    'https://example.com/media.jpg',
-                    'public'
-                ),
-                new GetPostViewModel(
-                    2,
-                    1,
-                    'Another content',
-                    'https://example.com/another_media.jpg',
-                    'private'
-                )
-            ]);
-
-        return $collection;
-    }
-
     public function test_view_model_collection_check_type(): void
     {
         $collection = new GetPostsViewModelCollection(
