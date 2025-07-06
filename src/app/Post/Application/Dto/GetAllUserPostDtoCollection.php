@@ -7,10 +7,10 @@ use App\Post\Application\Dto\GetUserEachPostDto as PostDto;
 class GetAllUserPostDtoCollection
 {
     /**
-     * @param PostDto[] $items
+     * @param PostDto[] $posts
      */
     public function __construct(
-        public readonly array $items
+        public readonly array $posts
     ) {}
 
     public static function build(array $items): self
@@ -30,6 +30,6 @@ class GetAllUserPostDtoCollection
      */
     public function getPosts(): array
     {
-        return $this->items;
+        return $this->posts;
     }
 }
