@@ -2,15 +2,12 @@
 
 namespace App\Post\Presentation\PresentationTest\Controller;
 
-use App\Common\Application\ApplicationTest\PaginationDtoTest;
 use App\Post\Application\UseCase\GetOthersAllPostsUseCase;
 use App\Post\Presentation\Controller\PostController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 use Mockery;
-use App\Common\Presentation\ViewModel\Pagination;
-use App\Post\Presentation\ViewModel\GetPostsViewModelCollection;
 use App\Common\Application\Dto\Pagination as PaginationDto;
 
 class PostController_getOthersPostsTest extends TestCase
