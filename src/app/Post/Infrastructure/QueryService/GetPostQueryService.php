@@ -94,7 +94,7 @@ class GetPostQueryService implements GetPostQueryServiceInterface
         int $currentPage
     ): ?PaginationDto {
 
-        $allPosts = $this->post
+        $getPosts = $this->post
             ->where('user_id', '!=', $userId)
             ->where('visibility', PostVisibilityEnum::PUBLIC->value)
             ->paginate(
@@ -104,9 +104,13 @@ class GetPostQueryService implements GetPostQueryServiceInterface
                 $currentPage
             );
 
-        if (empty($allPosts)) {
+        if (empty($getPosts)) {
             return null;
         }
+
+        $allPosts = $getPosts->map(function ($post) {
+            return PostFromModelEntityFactory::build($post->toArray());
+        });
 
         return $this->paginationDto($allPosts->toArray());
     }
