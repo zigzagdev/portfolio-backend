@@ -2,6 +2,8 @@
 
 namespace App\Post\Application\Dto;
 
+use App\Post\Domain\Entity\PostEntity;
+
 class GetUserEachPostDto
 {
     public function __construct(
@@ -20,6 +22,17 @@ class GetUserEachPostDto
             content: $data['content'],
             mediaPath: $data['mediaPath'] ?? null,
             visibility: $data['visibility'],
+        );
+    }
+
+    public static function buildFromEntity(PostEntity $entity): self
+    {
+        return new self(
+            id: $entity->getId()->getValue(),
+            userId: $entity->getUserId()->getValue(),
+            content: $entity->getContent(),
+            mediaPath: $entity->getMediaPath(),
+            visibility: $entity->getPostVisibility()->getStringValue()
         );
     }
 

@@ -37,7 +37,15 @@ class GetOthersAllPostsUseCase
             total: $allPosts->getTotal(),
             perPage: $allPosts->getPerPage(),
             currentPage: $allPosts->getCurrentPage(),
-            lastPage: $allPosts->getLastPage()
+            lastPage: $allPosts->getLastPage(),
+            from: $allPosts->getFrom(),
+            to: $allPosts->getTo(),
+            path: $allPosts->getPath(),
+            firstPageUrl: $allPosts->getFirstPageUrl(),
+            lastPageUrl: $allPosts->getLastPageUrl(),
+            nextPageUrl: $allPosts->getNextPageUrl(),
+            prevPageUrl: $allPosts->getPrevPageUrl(),
+            links: $allPosts->getLinks()
         );
     }
 }
