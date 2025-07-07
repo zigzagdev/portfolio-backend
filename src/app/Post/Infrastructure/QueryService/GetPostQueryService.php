@@ -5,6 +5,7 @@ namespace App\Post\Infrastructure\QueryService;
 use App\Common\Domain\ValueObject\PostId;
 use App\Common\Domain\ValueObject\UserId;
 use App\Models\Post;
+use App\Post\Application\Dto\GetUserEachPostDto;
 use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
 use App\Post\Domain\Entity\PostEntity;
 use App\Post\Domain\EntityFactory\PostFromModelEntityFactory;
@@ -67,7 +68,9 @@ class GetPostQueryService implements GetPostQueryServiceInterface
     ): PaginationDto
     {
         $dtos = array_map(
-            fn($item) => PostFromModelEntityFactory::build($item),
+            fn($item) => GetUserEachPostDto::buildFromEntity(
+                PostFromModelEntityFactory::build($item)
+            ),
             $data['data']
         );
 
@@ -108,10 +111,6 @@ class GetPostQueryService implements GetPostQueryServiceInterface
             return null;
         }
 
-        $allPosts = $getPosts->map(function ($post) {
-            return PostFromModelEntityFactory::build($post->toArray());
-        });
-
-        return $this->paginationDto($allPosts->toArray());
+        return $this->paginationDto($getPosts->toArray());
     }
 }

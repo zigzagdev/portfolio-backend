@@ -2,32 +2,24 @@
 
 namespace App\Post\Application\Dto;
 
-use App\Post\Application\Dto\GetUserEachPostDto as PostDto;
+use App\Post\Application\Dto\GetUserEachPostDto;
 
 class GetAllUserPostDtoCollection
 {
-    /**
-     * @param PostDto[] $posts
-     */
     public function __construct(
         public readonly array $posts
     ) {}
 
-    public static function build(array $items): self
+    public static function build(array $collection): self
     {
         $postDtos = array_map(
-            fn($item) => PostDto::build($item),
-            $items
+            fn($entity) => GetUserEachPostDto::buildFromEntity($entity),
+            $collection
         );
 
         return new self($postDtos);
     }
 
-    /**
-     * Convert the collection to an array of DTOs.
-     *
-     * @return PostDto[]
-     */
     public function getPosts(): array
     {
         return $this->posts;
