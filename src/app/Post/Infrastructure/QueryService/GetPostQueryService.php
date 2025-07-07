@@ -5,12 +5,14 @@ namespace App\Post\Infrastructure\QueryService;
 use App\Common\Domain\ValueObject\PostId;
 use App\Common\Domain\ValueObject\UserId;
 use App\Models\Post;
+use App\Post\Application\Dto\GetUserEachPostDto;
 use App\Post\Application\QueryServiceInterface\GetPostQueryServiceInterface;
 use App\Post\Domain\Entity\PostEntity;
 use App\Post\Domain\EntityFactory\PostFromModelEntityFactory;
 use App\Common\Application\Dto\Pagination as PaginationDto;
 use App\Models\User;
 use ErrorException;
+use App\Common\Domain\Enum\PostVisibility as PostVisibilityEnum;
 
 class GetPostQueryService implements GetPostQueryServiceInterface
 {
@@ -39,6 +41,8 @@ class GetPostQueryService implements GetPostQueryServiceInterface
                 $currentPage
             );
 
+
+
         return $this->paginationDto($userPosts->toArray());
     }
 
@@ -64,7 +68,9 @@ class GetPostQueryService implements GetPostQueryServiceInterface
     ): PaginationDto
     {
         $dtos = array_map(
-            fn($item) => PostFromModelEntityFactory::build($item),
+            fn($item) => GetUserEachPostDto::buildFromEntity(
+                PostFromModelEntityFactory::build($item)
+            ),
             $data['data']
         );
 
@@ -83,5 +89,28 @@ class GetPostQueryService implements GetPostQueryServiceInterface
             prevPageUrl: $data['prev_page_url'] ?? null,
             links: $data['links'] ?? null
         );
+    }
+
+    public function getOthersAllPosts(
+        int $userId,
+        int $perPage,
+        int $currentPage
+    ): ?PaginationDto {
+
+        $getPosts = $this->post
+            ->where('user_id', '!=', $userId)
+            ->where('visibility', PostVisibilityEnum::PUBLIC->value)
+            ->paginate(
+                $perPage,
+                ['*'],
+                'page',
+                $currentPage
+            );
+
+        if (empty($getPosts)) {
+            return null;
+        }
+
+        return $this->paginationDto($getPosts->toArray());
     }
 }
