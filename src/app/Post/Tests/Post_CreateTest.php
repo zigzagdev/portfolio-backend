@@ -31,11 +31,7 @@ class Post_CreateTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     * @testdox Post creation test successfully
-     */
-    public function test_feature_test(): void
+    public function test_create_post(): void
     {
         $request = [
             'first_name' => 'Cristiano',
