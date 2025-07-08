@@ -28,7 +28,14 @@ class PostEntity
             mediaPath: $request['mediaPath'] ?? null,
             visibility: $request['visibility'] instanceof PostVisibility
                 ? $request['visibility']
-                : new PostVisibility(PostVisibilityEnum::fromString($request['visibility']))
+                : new PostVisibility( PostVisibilityEnum::from(
+                    is_int($request['visibility'])
+                        ? $request['visibility']
+                        : match (strtoupper((string)$request['visibility'])) {
+                        'PUBLIC' => PostVisibilityEnum::PRIVATE->value,
+                        default => PostVisibilityEnum::PUBLIC->value,
+                    }
+                ))
         );
     }
 

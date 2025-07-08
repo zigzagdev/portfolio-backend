@@ -17,6 +17,7 @@ class CreateUseCase
     public function handle(
         CreatePostUseCommand $command
     ) {
+
         $entity = PostEntity::build(
             $command->toArray()
         );
