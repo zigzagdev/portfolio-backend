@@ -10,8 +10,8 @@ enum PostVisibility: int
     public function toLabel(): string
     {
         return match ($this) {
-            self::PUBLIC => 'Public',
-            self::PRIVATE => 'Private',
+            self::PUBLIC => 'public',
+            self::PRIVATE => 'private',
         };
     }
 }
