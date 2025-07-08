@@ -20,6 +20,6 @@ Route::prefix('users')->name('user.')->group(function () {
         Route::get('/', [PostController::class, 'getAllPosts'])->name('getAllPosts');
         Route::get('public', [PostController::class, 'getOthersPosts'])->name('getOthersPosts');
         Route::get('{postId}', [PostController::class, 'getEachPost'])->name('getEachPost');
-        Route::put('{userId}/posts/{postId}', [PostController::class, 'edit'])->name('posts.edit');
+        Route::put('{postId}', [PostController::class, 'edit'])->name('edit');
     });
 });
