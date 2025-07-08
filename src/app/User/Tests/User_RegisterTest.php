@@ -29,11 +29,7 @@ class User_RegisterTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     * @testdox User registration test successfully (some properties are null)
-     */
-    public function test1(): void
+    public function test_register_user_with_properties_nullable(): void
     {
         $request = [
             'first_name' => 'Cristiano',
@@ -48,17 +44,14 @@ class User_RegisterTest extends TestCase
 
         $response = $this
             ->postJson(
-                'api/user/register',
+                'api/users/register',
                 $request
             );
+
         $this->assertEquals(201, $response->getStatusCode());
     }
 
-    /**
-     * @test
-     * @testdox User registration test with invalid data (all properties are requested)
-     */
-    public function test2(): void
+    public function test_failed_with_invalid_data(): void
     {
         $request = [
             'first_name' => 'Lionel',
@@ -73,7 +66,7 @@ class User_RegisterTest extends TestCase
 
         $response = $this
             ->postJson(
-                'api/user/register',
+                'api/users/register',
                 $request
             );
 
