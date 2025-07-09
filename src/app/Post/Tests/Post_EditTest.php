@@ -45,35 +45,35 @@ class Post_EditTest extends TestCase
             'profile_image' => null,
         ];
 
-        $user_id = User::create($request)->id;
+        $userId = User::create($request)->id;
 
         $postRequest = [
             'content' => 'Vamos Portugal! The team has shown incredible skill and determination.',
             'media_path' => 'https://example.com/media.jpg',
-            'visibility' => 'public',
+            'visibility' => PostVisibilityEnum::PUBLIC->value,
         ];
 
-        $post_id = Post::create(array_merge($postRequest, ['user_id' => $user_id]))->id;
+        $postId = Post::create(array_merge($postRequest, ['user_id' => $userId]))->id;
 
         $editRequest = [
             'content' => 'Vamos Portugal! The team has shown incredible skill and determination. Updated content.',
             'media_path' => 'https://example.com/media_updated.jpg',
-            'visibility' => 'private',
+            'visibility' => PostVisibilityEnum::PRIVATE->value,
         ];
 
         $response = $this->putJson(
-            "api/users/{$user_id}/posts/{$post_id}",
+            "api/users/{$userId}/posts/{$postId}",
             $editRequest
         );
 
         $response->assertJson([
             'status' => 'success',
             'data' => [
-                'id' => $post_id,
-                'user_id' => $user_id,
+                'id' => $postId,
+                'user_id' => $userId,
                 'content' => $editRequest['content'],
                 'media_path' => $editRequest['media_path'],
-                'visibility' => PostVisibilityEnum::PRIVATE->value,
+                'visibility' => PostVisibilityEnum::PRIVATE->toLabel(),
             ]
         ]);
     }

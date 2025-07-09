@@ -16,6 +16,9 @@ use App\Post\Application\UseCase\GetAllUserPostUseCase;
 use App\Common\Presentation\ViewModelFactory\PaginationFactory as PaginationViewModelFactory;
 use App\Post\Application\Dto\GetUserEachPostDto;
 use App\Post\Presentation\ViewModel\GetAllUserPostViewModel;
+use App\Post\Application\UseCase\EditUseCase;
+use App\Post\Application\UseCommand\EditPostUseCommand;
+use App\Post\Presentation\ViewModel\EditPostViewModel;
 
 class PostController extends Controller
 {
@@ -121,18 +124,17 @@ class PostController extends Controller
 
     public function edit(
         Request $request,
-        int $user_id,
-        int $post_id,
+        int $userId,
+        int $postId,
         EditUseCase $useCase
     ): JsonResponse {
         DB::connection('mysql')->beginTransaction();
         try {
-
             $command = EditPostUseCommand::build(
                 array_merge(
                     $request->toArray(),
-                    ['userId' => $user_id],
-                    ['id' => $post_id]
+                    ['userId' => $userId],
+                    ['id' => $postId]
                 )
             );
 

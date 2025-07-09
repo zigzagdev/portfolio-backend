@@ -16,6 +16,7 @@ class EditUseCase
     public function handle(
         EditPostUseCommand $command
     ): EditPostDto {
+
         $entity = PostEntity::build(
             $command->toArray()
         );
