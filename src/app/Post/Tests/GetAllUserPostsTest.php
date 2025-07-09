@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
+use App\Common\Domain\Enum\PostVisibility as PostVisibilityEnum;
 
 class GetAllUserPostsTest extends TestCase
 {
@@ -55,7 +56,9 @@ class GetAllUserPostsTest extends TestCase
                 'user_id' => $this->userId,
                 'content' => "Portugal wins in World cup for {$i}times",
                 'media_path' => $i % 2 === 0 ? null : "https://example.com/image{$i}.jpg",
-                'visibility' => $i % 2 === 0 ? 1 : 0,
+                'visibility' => $i % 2 === 0
+                    ? PostVisibilityEnum::PRIVATE->value
+                    : PostVisibilityEnum::PUBLIC->value,
                 'created_at' => now()->subSeconds(50 - $i),
                 'updated_at' => now()->subSeconds(50 - $i),
             ];
