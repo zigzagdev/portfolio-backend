@@ -39,6 +39,7 @@ class PostRepository implements PostRepositoryInterface
 
         $targetPost->fill([
             'content' => $entity->getContent(),
+            'user_id' => $entity->getUserId()->getValue(),
             'media_path' => $entity->getMediaPath(),
             'visibility' => $entity->getPostVisibility()->getValue(),
         ])->save();

@@ -1,7 +1,8 @@
 <?php
 
-namespace User\Infrastructure\InfrastructureTest;
+namespace User\Infrastructure\InfrastructureTest\Service;
 
+use App\Common\Domain\ValueObject\UserId;
 use App\Models\User;
 use App\User\Domain\Entity\UserEntity;
 use App\User\Domain\Factory\UserFromModelEntityFactory;
@@ -11,7 +12,6 @@ use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Password;
 use App\User\Infrastructure\Repository\UserRepository;
 use App\User\Infrastructure\Service\JwtAuthService;
-use App\Common\Domain\ValueObject\UserId;
 use Illuminate\Support\Facades\DB;
 use Mockery;
 use Tests\TestCase;

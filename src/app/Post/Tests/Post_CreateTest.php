@@ -2,6 +2,7 @@
 
 namespace App\Post\Tests;
 
+use App\Common\Domain\Enum\PostVisibility as PostVisibilityEnum;
 use App\Models\Post;
 use App\Models\User;
 use Tests\TestCase;
@@ -31,11 +32,7 @@ class Post_CreateTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     * @testdox Post creation test successfully
-     */
-    public function test_feature_test(): void
+    public function test_create_post(): void
     {
         $request = [
             'first_name' => 'Cristiano',
@@ -54,7 +51,7 @@ class Post_CreateTest extends TestCase
             'title' => 'Portugal Wins Nations League in 2025',
             'content' => 'Vamos Portugal! The team has shown incredible skill and determination.',
             'media_path' => 'https://example.com/media.jpg',
-            'visibility' => 'public',
+            'visibility' => PostVisibilityEnum::PUBLIC->value,
         ];
 
         $response = $this->post(

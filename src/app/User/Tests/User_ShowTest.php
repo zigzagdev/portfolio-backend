@@ -9,7 +9,7 @@ use App\Models\User;
 
 class User_ShowTest extends TestCase
 {
-    private User $user;
+    private  $user;
 
     protected function setUp(): void
     {
@@ -33,11 +33,7 @@ class User_ShowTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     * @testdox User registration test successfully (some properties are null)
-     */
-    public function test1(): void
+    public function test_success_with_nullable_properties(): void
     {
         $user = User::create([
             'first_name' => 'Lionel',
@@ -52,15 +48,11 @@ class User_ShowTest extends TestCase
 
         $userId = $user->id;
 
-        $response = $this->getJson("api/user/show/{$userId}");
+        $response = $this->getJson("api/users/show/{$userId}");
         $this->assertInstanceOf(TestResponse::class, $response);
     }
 
-    /**
-     * @test
-     * @testdox User registration test with invalid data (all properties are requested)
-     */
-    public function test2(): void
+    public function test_failed_with_invalid_property(): void
     {
         $user = User::create([
             'first_name' => 'Cristiano',
@@ -75,7 +67,7 @@ class User_ShowTest extends TestCase
 
         $userId = $user->id;
 
-        $response = $this->getJson("api/user/show/{$userId}");
+        $response = $this->getJson("api/users/show/{$userId}");
 
         $this->assertEquals(200, $response->getStatusCode());
 
